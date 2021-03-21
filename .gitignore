@@ -27,7 +27,4 @@ MANIFEST.MF
 gradle
 .gradle
 
-#angular
-node_modules
-
 
