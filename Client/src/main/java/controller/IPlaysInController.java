@@ -13,5 +13,7 @@ public interface IPlaysInController {
 
     Future<Iterable<PlaysIn>> getAllPlaysIn();
 
-    Future<Iterable<PlaysIn>> getPlaysInRelationAfterRole(String role);
+    Future<Iterable<PlaysIn>> getPlayInRelationAfterRole(String role);
+
+    Future<Double> getPercentageOfRolesOfActors(String role);
 }

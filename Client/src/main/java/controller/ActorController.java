@@ -104,7 +104,7 @@ public class ActorController implements IActorController{
     public Future<Iterable<Actor>> getActorsWithFameBetween(int lower, int upper) {
         Callable<Iterable<Actor>> callable = () ->
         {
-            Message message = new Message("ActorController: getActorsWithFameBetween");
+            Message message = new Message("ActorController:getActorsWithFameBetween");
             message.addRow(NetworkUtils.serialiseObject(lower));
             message.addRow(NetworkUtils.serialiseObject(upper));
             Message response = TCPClient.sendAndReceive(message);
@@ -113,6 +113,25 @@ public class ActorController implements IActorController{
                 return response.getBody().stream()
                         .map(string -> NetworkUtils.deserializeObject(string, Actor.class))
                         .collect(Collectors.toUnmodifiableList());
+            }
+            NetworkUtils.checkException(response);
+            throw new RuntimeException("Received response was invalid");
+        };
+        return executorService.submit(callable);
+    }
+
+    @Override
+    public Future<Double> getPercentageOfFamousActors(int fame) {
+        Callable<Double> callable = () ->
+        {
+            Message message = new Message("ActorController:getPercentageOfFamousActors");
+
+            message.addRow(NetworkUtils.serialiseObject(fame));
+
+            Message response = TCPClient.sendAndReceive(message);
+            if (NetworkUtils.isSuccess(response))
+            {
+                return NetworkUtils.deserializeObject(response.getBody().get(0), Double.class);
             }
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");

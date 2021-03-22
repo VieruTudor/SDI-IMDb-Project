@@ -1,6 +1,5 @@
 package controller;
 
-import domain.Actor;
 import domain.Director;
 import networking.Message;
 import networking.TCPClient;
@@ -103,7 +102,7 @@ public class DirectorController implements IDirectorController{
     public Future<Iterable<Director>> getDirectorsWithAgeSmallerThen(int margin) {
         Callable<Iterable<Director>> callable = () ->
         {
-            Message message = new Message("DirectorController: getDirectorsWithAgeSmallerThen");
+            Message message = new Message("DirectorController:getDirectorsWithAgeSmallerThen");
             message.addRow(NetworkUtils.serialiseObject(margin));
             Message response = TCPClient.sendAndReceive(message);
 
@@ -117,4 +116,25 @@ public class DirectorController implements IDirectorController{
         };
         return executorService.submit(callable);
     }
+
+    @Override
+    public Future<Double> getPercentageOfYoungDirectors(int age) {
+        Callable<Double> callable = () ->
+        {
+            Message message = new Message("DirectorController:getPercentageOfYoungDirectors");
+
+            message.addRow(NetworkUtils.serialiseObject(age));
+
+            Message response = TCPClient.sendAndReceive(message);
+            if (NetworkUtils.isSuccess(response))
+            {
+                return NetworkUtils.deserializeObject(response.getBody().get(0), Double.class);
+            }
+            NetworkUtils.checkException(response);
+            throw new RuntimeException("Received response was invalid");
+        };
+        return executorService.submit(callable);
+    }
+
+
 }

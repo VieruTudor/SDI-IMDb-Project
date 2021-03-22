@@ -1,6 +1,5 @@
 package controller;
 
-import domain.Actor;
 import domain.Director;
 
 import java.util.concurrent.Future;
@@ -15,4 +14,6 @@ public interface IDirectorController {
     Future<Iterable<Director>> getAllDirectors();
 
     Future<Iterable<Director>> getDirectorsWithAgeSmallerThen(int margin);
+
+    Future<Double> getPercentageOfYoungDirectors(int age);
 }

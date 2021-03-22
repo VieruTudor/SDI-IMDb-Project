@@ -15,4 +15,6 @@ public interface IMovieController {
     Future<Iterable<Movie>> getAllMovies();
 
     Future<Iterable<Movie>> getMoviesWithRatingHigherThan(int margin);
+
+    Future<Double> getPercentageOfMoviesThisDecade(int decade);
 }

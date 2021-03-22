@@ -14,4 +14,6 @@ public interface IActorController {
     Future<Iterable<Actor>> getAllActors();
 
     Future<Iterable<Actor>> getActorsWithFameBetween(int lower, int upper);
+
+    Future<Double> getPercentageOfFamousActors(int fame);
 }

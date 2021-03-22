@@ -121,4 +121,23 @@ public class MovieController implements IMovieController{
         return executorService.submit(callable);
 
     }
+
+    @Override
+    public Future<Double> getPercentageOfMoviesThisDecade(int decade) {
+        Callable<Double> callable = () ->
+        {
+            Message message = new Message("DirectorController:getPercentageOfMoviesThisDecade");
+
+            message.addRow(NetworkUtils.serialiseObject(decade));
+
+            Message response = TCPClient.sendAndReceive(message);
+            if (NetworkUtils.isSuccess(response))
+            {
+                return NetworkUtils.deserializeObject(response.getBody().get(0), Double.class);
+            }
+            NetworkUtils.checkException(response);
+            throw new RuntimeException("Received response was invalid");
+        };
+        return executorService.submit(callable);
+    }
 }

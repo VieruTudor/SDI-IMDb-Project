@@ -100,10 +100,11 @@ public class PlaysInController implements IPlaysInController{
     }
 
     @Override
-    public Future<Iterable<PlaysIn>> getPlaysInRelationAfterRole(String role) {
+    public Future<Iterable<PlaysIn>> getPlayInRelationAfterRole(String role) {
         Callable<Iterable<PlaysIn>> callable = () ->
         {
-            Message message = new Message("MovieController:getPlaysInRelationAfterRole");
+            Message message = new Message("PlaysInController:getPlayInRelationAfterRole");
+            message.addRow(NetworkUtils.serialiseObject(role));
             Message response = TCPClient.sendAndReceive(message);
             if (NetworkUtils.isSuccess(response))
             {
@@ -119,4 +120,24 @@ public class PlaysInController implements IPlaysInController{
         };
         return executorService.submit(callable);
     }
+
+    @Override
+    public Future<Double> getPercentageOfRolesOfActors(String role) {
+        Callable<Double> callable = () ->
+        {
+            Message message = new Message("PlaysInController:getPercentageOfRolesOfActors");
+
+            message.addRow(NetworkUtils.serialiseObject(role));
+
+            Message response = TCPClient.sendAndReceive(message);
+            if (NetworkUtils.isSuccess(response))
+            {
+                return NetworkUtils.deserializeObject(response.getBody().get(0), Double.class);
+            }
+            NetworkUtils.checkException(response);
+            throw new RuntimeException("Received response was invalid");
+        };
+        return executorService.submit(callable);
+    }
+
 }
