@@ -24,17 +24,17 @@ public class Server {
     public void run(){
         try (ServerSocket serverSocket = new ServerSocket(ServerInformation.PORT))
         {
-            System.out.println("Server started in viata mea");
+            System.out.println("Server started ");
             while(running){
                 Socket client = serverSocket.accept();
-                System.out.println("Am gasit mare client");
                 executorService.submit(new server.HandleRequest(client, actorController));
             }
 
             executorService.shutdown();
         }
         catch (IOException e) {
-            System.out.println("Am belit pula");
+            // do something
+            e.printStackTrace();
         }
     }
 }

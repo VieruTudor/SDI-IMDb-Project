@@ -21,9 +21,6 @@ public class HandleRequest implements Runnable {
     @Override
     public void run() {
 
-        System.out.println("Am facut ceva");
-
-
         try (InputStream inputStream = client.getInputStream();
              OutputStream outputStream = client.getOutputStream()) {
             var message = Message.read(inputStream);

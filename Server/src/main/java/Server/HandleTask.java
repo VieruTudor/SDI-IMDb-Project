@@ -90,7 +90,7 @@ public class HandleTask {
             return NetworkUtils.success(null);
         }
         catch(Exception e){
-            System.out.println("Am belit pula grav");
+            e.printStackTrace();
         }
 
 
