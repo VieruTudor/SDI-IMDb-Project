@@ -14,4 +14,6 @@ public interface IDirectorController {
     Iterable<Director> getAllDirectors();
 
     Set<Director> getDirectorsWithAgeSmallerThen(int margin);
+
+    Long getPercentageOfYoungDirectors();
 }

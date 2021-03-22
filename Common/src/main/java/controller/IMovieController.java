@@ -15,4 +15,6 @@ public interface IMovieController {
 
     Set<Movie> getMoviesWithRatingHigherThan(int margin);
 
+    Long getPercentageOfMoviesThisDecade();
+
 }
