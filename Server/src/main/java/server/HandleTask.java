@@ -1,6 +1,6 @@
 package server;
 
-import Utils.ControllerMapper;
+import utils.ControllerMapper;
 import controller.IActorController;
 import exception.InexistentEntity;
 import networking.Message;
