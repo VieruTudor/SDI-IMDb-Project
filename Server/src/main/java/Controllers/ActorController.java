@@ -30,7 +30,7 @@ public class ActorController  implements IActorController{
     /**
      * Deletes an actor based on its id
      *
-     * @param actorId given Id for the actor to be deleted
+     * @param id given Id for the actor to be deleted
      */
     @Override
     public void deleteActor(int id)

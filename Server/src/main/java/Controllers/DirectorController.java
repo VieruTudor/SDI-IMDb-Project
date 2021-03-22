@@ -15,9 +15,9 @@ public class DirectorController  implements IDirectorController {
     /**
      * Creates a Director object and adds it into the repository
      *
-     * @param directorId   the Id of the Director
-     * @param directorName name of the Director
-     * @param directorAge  age of the Director
+     * @param id   the Id of the Director
+     * @param name name of the Director
+     * @param age  age of the Director
      */
     @Override
     public void addDirector(int id, String name, int age)
@@ -30,7 +30,7 @@ public class DirectorController  implements IDirectorController {
     /**
      * Deletes a Director based on the given Id
      *
-     * @param directorId given Id
+     * @param id given Id
      */
     @Override
     public void deleteDirector(int id)
@@ -40,9 +40,9 @@ public class DirectorController  implements IDirectorController {
     /**
      * Updates a Director based on a given ID
      *
-     * @param directorId   the given ID
-     * @param directorName the new director name
-     * @param directorAge  the new director age
+     * @param id   the given ID
+     * @param name the new director name
+     * @param age  the new director age
      */
     @Override
     public void updateDirector(int id, String name, int age)

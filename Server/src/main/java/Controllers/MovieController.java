@@ -31,7 +31,7 @@ public class MovieController implements IMovieController {
     /**
      * Deletes a movie based on its id
      *
-     * @param movieId given Id for the movie to be deleted
+     * @param id given Id for the movie to be deleted
      */
     @Override
     public void deleteMovie(int id)
