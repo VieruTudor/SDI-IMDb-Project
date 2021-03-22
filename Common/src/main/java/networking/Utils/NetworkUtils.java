@@ -3,6 +3,7 @@ package networking.Utils;
 import domain.serializers.*;
 import exception.InexistentEntity;
 import networking.Message;
+import networking.primitevesSerialization.DoubleSerializer;
 import networking.primitevesSerialization.IntegerSerializer;
 import networking.primitevesSerialization.StringSerializer;
 
@@ -18,6 +19,7 @@ public class NetworkUtils {
     static {
         serializers.put(int.class, new IntegerSerializer());
         serializers.put(Integer.class, new IntegerSerializer());
+        serializers.put(Double.class, new DoubleSerializer());
         serializers.put(String.class, new StringSerializer());
         serializers.put(Actor.class, new ActorCSVSerializer());
         serializers.put(Director.class, new DirectorCSVSerializer());
@@ -52,7 +54,6 @@ public class NetworkUtils {
             {
                 throw new RuntimeException("Received response was invalid");
             }
-            // change this i guess
             throw new RuntimeException(messageBody.get(0));
         }
     }

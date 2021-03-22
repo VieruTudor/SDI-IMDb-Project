@@ -15,6 +15,7 @@ public class TCPClient {
              OutputStream outputStream = socket.getOutputStream()
         ) {
             Message.write(request, outputStream);
+
             return Message.read(inputStream);
         } catch (IOException e) {
             throw new ConnectionException("Connection Failed");

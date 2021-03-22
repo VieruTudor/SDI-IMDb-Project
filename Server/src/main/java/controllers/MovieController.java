@@ -5,7 +5,7 @@ import repository.*;
 import domain.*;
 import java.util.stream.*;
 import java.util.Set;
-import Validators.Validator;
+import validators.Validator;
 public class MovieController implements IMovieController {
     private IRepository<Integer,Movie> movies;
     public MovieController(IRepository<Integer,Movie>movies)
@@ -72,7 +72,7 @@ public class MovieController implements IMovieController {
      * @return Set containing the collection resulted
      */
     @Override
-    public Set<Movie> getMoviesWithRatingHigherThan(int margin)
+    public Iterable<Movie> getMoviesWithRatingHigherThan(int margin)
     {
         return StreamSupport.stream(this.getAllMovies().spliterator(), false)
                 .collect(Collectors.toSet()).stream()
@@ -83,12 +83,12 @@ public class MovieController implements IMovieController {
      *
      * @return Long value representing the requested percentage
      */
-    public Long getPercentageOfMoviesThisDecade(){
-        long thisDecadeMovies = StreamSupport.stream(this.getAllMovies().spliterator(), false)
+    public Double getPercentageOfMoviesThisDecade(int decade){
+        double thisDecadeMovies = StreamSupport.stream(this.getAllMovies().spliterator(), false)
                 .collect(Collectors.toSet()).stream()
-                .filter(movie -> movie.getYear() >= 2010)
+                .filter(movie -> movie.getYear() >= decade)
                 .count();
-        long allMovies = StreamSupport.stream(this.getAllMovies().spliterator(), false).count();
+        double allMovies = StreamSupport.stream(this.getAllMovies().spliterator(), false).count();
         return (thisDecadeMovies * 100) / allMovies;
     }
 }

@@ -13,8 +13,8 @@ public interface IMovieController {
 
     Iterable<Movie> getAllMovies();
 
-    Set<Movie> getMoviesWithRatingHigherThan(int margin);
+    Iterable<Movie> getMoviesWithRatingHigherThan(int margin);
 
-    Long getPercentageOfMoviesThisDecade();
+    Double getPercentageOfMoviesThisDecade(int decade);
 
 }

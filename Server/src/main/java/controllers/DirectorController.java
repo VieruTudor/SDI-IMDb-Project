@@ -5,7 +5,7 @@ import repository.*;
 import domain.*;
 import java.util.stream.*;
 import java.util.Set;
-import Validators.Validator;
+import validators.Validator;
 public class DirectorController  implements IDirectorController {
     private IRepository<Integer,Director> directors;
     public DirectorController(IRepository<Integer,Director> directors)
@@ -69,7 +69,7 @@ public class DirectorController  implements IDirectorController {
      * @return Set containing the collection resulted
      */
     @Override
-    public Set<Director> getDirectorsWithAgeSmallerThen(int margin) {
+    public Iterable<Director> getDirectorsWithAgeSmallerThen(int margin) {
         return StreamSupport.stream(this.getAllDirectors().spliterator(), false)
                 .collect(Collectors.toSet()).stream()
                 .filter(m -> m.getAge() <= margin).collect(Collectors.toSet());
@@ -79,12 +79,12 @@ public class DirectorController  implements IDirectorController {
      *
      * @return Long value representing the requested percentage
      */
-    public Long getPercentageOfYoungDirectors(){
-        long youngDirectors = StreamSupport.stream(this.getAllDirectors().spliterator(), false)
+    public Double getPercentageOfYoungDirectors(int age){
+        double youngDirectors = StreamSupport.stream(this.getAllDirectors().spliterator(), false)
                 .collect(Collectors.toSet()).stream()
-                .filter(director -> director.getAge() <= 28)
+                .filter(director -> director.getAge() <= age)
                 .count();
-        long allDirectors = StreamSupport.stream(this.getAllDirectors().spliterator(), false).count();
+        double allDirectors = StreamSupport.stream(this.getAllDirectors().spliterator(), false).count();
         return (youngDirectors * 100) / allDirectors;
     }
 

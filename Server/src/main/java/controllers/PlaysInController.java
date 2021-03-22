@@ -5,7 +5,7 @@ import repository.*;
 import domain.*;
 import java.util.stream.*;
 import java.util.Set;
-import Validators.Validator;
+import validators.Validator;
 public class PlaysInController implements IPlaysInController {
     private  IRepository<Pair<Integer, Integer>, PlaysIn> playsIn;
     public PlaysInController(IRepository<Pair<Integer, Integer>, PlaysIn> playsIn)
@@ -68,7 +68,7 @@ public class PlaysInController implements IPlaysInController {
      * @return Set containing the collection resulted
      */
     @Override
-    public Set<PlaysIn> getPlaysInRelationAfterRole(String role)
+    public Iterable<PlaysIn> getPlaysInRelationAfterRole(String role)
     {
         return StreamSupport.stream(this.getAllPlaysIn().spliterator(), false)
                 .collect(Collectors.toSet()).stream()
@@ -80,11 +80,11 @@ public class PlaysInController implements IPlaysInController {
      * @param role given role
      * @return Long value representing the requested percentage
      */
-    public Long getPercentageOfRolesOfActors(String role){
-        long actorsWithRequestedRole = StreamSupport.stream(this.getAllPlaysIn().spliterator(), false)
+    public Double getPercentageOfRolesOfActors(String role){
+        double actorsWithRequestedRole = StreamSupport.stream(this.getAllPlaysIn().spliterator(), false)
                 .collect(Collectors.toSet()).stream()
                 .filter(m -> m.getRole().equals(role)).count();
-        long allActors = StreamSupport.stream(this.getAllPlaysIn().spliterator(), false).count();
+        double allActors = StreamSupport.stream(this.getAllPlaysIn().spliterator(), false).count();
         return (actorsWithRequestedRole * 100) / allActors;
     }
 

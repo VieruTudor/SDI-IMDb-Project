@@ -13,7 +13,7 @@ public interface IPlaysInController {
 
     Iterable<PlaysIn> getAllPlaysIn();
 
-    Set<PlaysIn> getPlaysInRelationAfterRole(String role);
+    Iterable<PlaysIn> getPlaysInRelationAfterRole(String role);
 
-    Long getPercentageOfRolesOfActors(String role);
+    Double getPercentageOfRolesOfActors(String role);
 }

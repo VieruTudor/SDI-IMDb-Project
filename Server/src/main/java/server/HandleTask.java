@@ -7,6 +7,7 @@ import networking.Message;
 import networking.Utils.NetworkUtils;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +25,7 @@ public class HandleTask {
     }
 
 
-    public static Message handleTask(Message message,
-                                     IActorController actorController) throws Exception
+    public static Message handleTask(Message message) throws Exception
     {
         // SPLIT THIS FUNCTION INTO SMALLER ONE
         // SINGLE RESPONSIBILITY PRINCIPLE ( ASK GABI IF YOU DON'T KNOW )
@@ -76,15 +76,19 @@ public class HandleTask {
                             parameterTypes[i]
                     )
             );
-
             Object returnedValue = method.invoke(controller, parameters);
-
             if (method.getReturnType().equals(Iterable.class))
             {
                 List<String> values = StreamSupport
                         .stream(((Iterable<?>) returnedValue).spliterator(), false)
                         .map(NetworkUtils::serialiseObject)
                         .collect(Collectors.toList());
+                return NetworkUtils.success(values);
+            }
+            else if (method.getReturnType().equals(Double.class))
+            {
+                ArrayList<String> values = new ArrayList<>();
+                values.add(NetworkUtils.serialiseObject(returnedValue));
                 return NetworkUtils.success(values);
             }
             return NetworkUtils.success(null);

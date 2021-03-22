@@ -13,7 +13,7 @@ public interface IDirectorController {
 
     Iterable<Director> getAllDirectors();
 
-    Set<Director> getDirectorsWithAgeSmallerThen(int margin);
+    Iterable<Director> getDirectorsWithAgeSmallerThen(int margin);
 
-    Long getPercentageOfYoungDirectors();
+    Double getPercentageOfYoungDirectors(int age);
 }

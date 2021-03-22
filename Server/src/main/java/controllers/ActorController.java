@@ -1,16 +1,21 @@
 package controllers;
+
 import controller.IActorController;
 import repository.*;
 import domain.*;
+
 import java.util.stream.*;
 import java.util.Set;
-import Validators.Validator;
-public class ActorController  implements IActorController{
+
+import validators.Validator;
+
+public class ActorController implements IActorController {
     private IRepository<Integer, Actor> actors;
-    public ActorController(IRepository<Integer,Actor> repo)
-    {
-        this.actors=repo;
+
+    public ActorController(IRepository<Integer, Actor> repo) {
+        this.actors = repo;
     }
+
     /**
      * Creates an actor object from the received parameters and adds it to the repository.
      *
@@ -20,23 +25,23 @@ public class ActorController  implements IActorController{
      * @param fame given Fame
      */
     @Override
-    public void addActor(int id, String name, int age, int fame)
-    {
-        Validator.validateActor(name,age,fame);
-        Actor newActor=new Actor(name,age,fame);
+    public void addActor(int id, String name, int age, int fame) {
+        Validator.validateActor(name, age, fame);
+        Actor newActor = new Actor(name, age, fame);
         newActor.setId(id);
         this.actors.save(newActor);
     }
+
     /**
      * Deletes an actor based on its id
      *
      * @param id given Id for the actor to be deleted
      */
     @Override
-    public void deleteActor(int id)
-    {
+    public void deleteActor(int id) {
         this.actors.delete(id);
     }
+
     /**
      * Updates an actor based on a given ID
      *
@@ -46,23 +51,23 @@ public class ActorController  implements IActorController{
      * @param fame the new fame
      */
     @Override
-    public void updateActor(int id, String name, int age, int fame)
-    {
-        Validator.validateActor(name,age,fame);
+    public void updateActor(int id, String name, int age, int fame) {
+        Validator.validateActor(name, age, fame);
         Actor new_actor = new Actor(name, age, fame);
         new_actor.setId(id);
         this.actors.update(new_actor);
     }
+
     /**
      * Gets all the actors in the repository.
      *
      * @return Iterable containing all actors in the repository.
      */
     @Override
-    public Iterable<Actor> getAllActors()
-    {
+    public Iterable<Actor> getAllActors() {
         return this.actors.findAll();
     }
+
     /**
      * Get all actors with fame between given interval
      *
@@ -71,25 +76,24 @@ public class ActorController  implements IActorController{
      * @return Set containing the collection resulted
      */
     @Override
-    public Set<Actor> getActorsWithFameBetween(int lower, int upper)
-    {
-        return StreamSupport.stream(this.getAllActors().spliterator(), false)
+    public Iterable<Actor> getActorsWithFameBetween(int lower, int upper) {
+        return StreamSupport.stream(this.getAllActors().spliterator(), true)
                 .collect(Collectors.toSet()).stream()
                 .filter(m -> m.getFame() >= lower && m.getFame() <= upper).collect(Collectors.toSet());
     }
+
     /**
      * Get percentage of actors that have a fame greater then 60
      *
      * @return Long value representing the requested percentage
      */
     @Override
-    public Long getPercentageOfFamousActors()
-    {
-        long famousActors = StreamSupport.stream(this.getAllActors().spliterator(), false)
+    public Double getPercentageOfFamousActors(int fame) {
+        double famousActors = StreamSupport.stream(this.getAllActors().spliterator(), true)
                 .collect(Collectors.toSet()).stream()
-                .filter(a -> a.getFame() >= 6)
+                .filter(a -> a.getFame() >= fame)
                 .count();
-        long allActors = StreamSupport.stream(this.getAllActors().spliterator(), false).count();
+        double allActors = StreamSupport.stream(this.getAllActors().spliterator(), true).count();
         return (famousActors * 100) / allActors;
     }
 }

@@ -9,14 +9,12 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
 public class Server {
-    private final IActorController actorController;
     private Boolean running = true;
     private ExecutorService executorService;
 
 
 
-    public Server(IActorController actorController, ExecutorService srv) {
-        this.actorController = actorController;
+    public Server(ExecutorService srv) {
         this.executorService = srv;
     }
 
@@ -26,7 +24,7 @@ public class Server {
             System.out.println("server started ");
             while(running){
                 Socket client = serverSocket.accept();
-                executorService.submit(new server.HandleRequest(client, actorController));
+                executorService.submit(new server.HandleRequest(client));
             }
 
             executorService.shutdown();
