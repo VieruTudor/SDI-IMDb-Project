@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 import controller.IActorController;
 import repository.*;
 import domain.*;

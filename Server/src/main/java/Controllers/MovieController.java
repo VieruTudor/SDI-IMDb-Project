@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 
 import controller.IMovieController;
 import repository.*;
