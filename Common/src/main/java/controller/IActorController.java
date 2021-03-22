@@ -14,4 +14,8 @@ public interface IActorController {
     Iterable<Actor> getAllActors();
 
     Set<Actor> getActorsWithFameBetween(int lower, int upper);
+
+    Long getPercentageOfFamousActors();
+
+
 }

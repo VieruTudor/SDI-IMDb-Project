@@ -1,5 +1,5 @@
 rootProject.name = 'lab5x'
-include 'Server'
+include 'server'
 include 'Client'
 include 'Common'
 
