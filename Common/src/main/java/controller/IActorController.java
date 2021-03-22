@@ -4,7 +4,7 @@ import domain.Actor;
 
 import java.util.Set;
 
-public interface ActorController {
+public interface IActorController {
     void addActor(int id, String name, int age, int fame);
 
     void deleteActor(int id);

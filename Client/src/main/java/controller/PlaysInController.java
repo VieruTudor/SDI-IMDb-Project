@@ -11,7 +11,7 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class PlaysInController implements IPlaysInController{
-    private ExecutorService executorService;
+    private final ExecutorService executorService;
 
     public PlaysInController(ExecutorService executorService){
         this.executorService = executorService;
@@ -27,7 +27,7 @@ public class PlaysInController implements IPlaysInController{
             message.addRow(NetworkUtils.serialiseObject(role));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }
@@ -47,7 +47,7 @@ public class PlaysInController implements IPlaysInController{
             message.addRow(NetworkUtils.serialiseObject(actorId));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }
@@ -68,7 +68,7 @@ public class PlaysInController implements IPlaysInController{
             message.addRow(NetworkUtils.serialiseObject(role));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }

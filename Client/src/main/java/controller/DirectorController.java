@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class DirectorController implements IDirectorController{
-    private ExecutorService executorService;
+    private final ExecutorService executorService;
 
     public DirectorController(ExecutorService executorService){
         this.executorService = executorService;
@@ -28,7 +28,7 @@ public class DirectorController implements IDirectorController{
             message.addRow(NetworkUtils.serialiseObject(age));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }
@@ -47,7 +47,7 @@ public class DirectorController implements IDirectorController{
             message.addRow(NetworkUtils.serialiseObject(id));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }
@@ -68,7 +68,7 @@ public class DirectorController implements IDirectorController{
             message.addRow(NetworkUtils.serialiseObject(age));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }

@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class MovieController implements IMovieController{
-    private ExecutorService executorService;
+    private final ExecutorService executorService;
 
     public MovieController(ExecutorService executorService){
         this.executorService = executorService;
@@ -30,7 +30,7 @@ public class MovieController implements IMovieController{
             message.addRow(NetworkUtils.serialiseObject(directorId));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }
@@ -49,7 +49,7 @@ public class MovieController implements IMovieController{
             message.addRow(NetworkUtils.serialiseObject(id));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }
@@ -71,7 +71,7 @@ public class MovieController implements IMovieController{
             message.addRow(NetworkUtils.serialiseObject(directorId));
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }

@@ -7,6 +7,7 @@ import networking.primitevesSerialization.IntegerSerializer;
 import networking.primitevesSerialization.StringSerializer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import domain.*;
@@ -36,6 +37,34 @@ public class NetworkUtils {
             throw new InexistentEntity("Class can not be deserialized");
         return (T) serializers.get(_class).deserialize(string);
     }
+
+    public static boolean isSuccess(Message message)
+    {
+        return message.getHeader().equals("success");
+    }
+
+    public static void checkException(Message message)
+    {
+        if (message.getHeader().equals("exception"))
+        {
+            List<String> messageBody = message.getBody();
+            if (messageBody.size() != 1)
+            {
+                throw new RuntimeException("Received response was invalid");
+            }
+            // change this i guess
+            throw new RuntimeException(messageBody.get(0));
+        }
+    }
+
+    public static Message success(List<String> value)
+    {
+        Message message = new Message("success");
+        if (value != null)
+            value.forEach(message::addRow);
+        return message;
+    }
+
     @SuppressWarnings({"unchecked"})
     public static <T> String serialiseObject(T object){
         var _class = object.getClass();

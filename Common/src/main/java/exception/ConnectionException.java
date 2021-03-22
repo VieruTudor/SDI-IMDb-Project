@@ -1,2 +1,8 @@
-package exception;public class ConnectionException {
+package exception;
+
+public class ConnectionException extends RuntimeException{
+    public ConnectionException(String message) {
+        super(message);
+    }
+
 }

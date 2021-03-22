@@ -4,7 +4,7 @@ import domain.Director;
 
 import java.util.Set;
 
-public interface DirectorController {
+public interface IDirectorController {
     void addDirector(int id, String name, int age);
 
     void deleteDirector(int id);

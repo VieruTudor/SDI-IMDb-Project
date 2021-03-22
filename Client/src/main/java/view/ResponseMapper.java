@@ -1,5 +1,7 @@
 package view;
 
+import exception.ProgramException;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.function.Function;
@@ -26,7 +28,7 @@ public class ResponseMapper<T> implements Function<Future<T>, String> {
         {
             if (e.getCause() instanceof ProgramException)
             {
-                return Console.handleException((ProgramException) e.getCause());
+                return null; // ???
             }
             else
             {

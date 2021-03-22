@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ActorController implements IActorController{
 
-    private ExecutorService executorService;
+    private final ExecutorService executorService;
 
     public ActorController(ExecutorService executorService){
         this.executorService = executorService;
@@ -31,7 +31,7 @@ public class ActorController implements IActorController{
 
 
             Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess)
+            if (NetworkUtils.isSuccess(response))
             {
                 return null;
             }

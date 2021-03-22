@@ -4,7 +4,7 @@ import domain.Movie;
 
 import java.util.Set;
 
-public interface MovieController {
+public interface IMovieController {
     void addMovie(int id, String name, int rating, int year, int directorId);
 
     void deleteMovie(int id);

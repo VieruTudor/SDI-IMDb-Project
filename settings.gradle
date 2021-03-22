@@ -3,3 +3,4 @@ include 'Server'
 include 'Client'
 include 'Common'
 
+project(':Common').projectDir = new File("Common")
