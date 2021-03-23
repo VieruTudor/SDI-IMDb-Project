@@ -8,6 +8,7 @@ import networking.Utils.NetworkUtils;
 import utils.ControllerMapper;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -86,6 +87,12 @@ public class HandleTask {
                         .stream(((Iterable<?>) returnedValue).spliterator(), false)
                         .map(NetworkUtils::serialiseObject)
                         .collect(Collectors.toList());
+                return NetworkUtils.successMessage(values);
+            }
+            else if (method.getReturnType().equals(Double.class))
+            {
+                ArrayList<String> values = new ArrayList<>();
+                values.add(NetworkUtils.serialiseObject(returnedValue));
                 return NetworkUtils.successMessage(values);
             }
             return NetworkUtils.successMessage(null);

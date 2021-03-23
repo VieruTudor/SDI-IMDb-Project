@@ -1,4 +1,4 @@
-package Validators;
+package validators;
 import exception.ValidException;
 
 public class Validator {
