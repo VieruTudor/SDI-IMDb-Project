@@ -1,103 +1,100 @@
 package server;
 
-import utils.ControllerMapper;
 import controller.IActorController;
 import exception.InexistentEntity;
+import exception.InvalidMessage;
 import networking.Message;
 import networking.Utils.NetworkUtils;
+import utils.ControllerMapper;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
-// WE WILL USE LIKE THIS
-// Client -> Message {
-//          Header: ControllerName:methodName
-//          Body: el1,el2,el3...
-
 public class HandleTask {
     private HandleTask()
     {
     }
 
+    private static class HeaderParts{
+        public String controller;
+        public String method;
+
+        public HeaderParts(String controller, String method) {
+            this.controller = controller;
+            this.method = method;
+        }
+    }
+
+    public static HeaderParts splitHeader(Message message){
+        var headComponents = message.getHeader().split(":");
+        if(headComponents.length != 2)
+            throw new InvalidMessage("Invalid header");
+        return new HeaderParts(headComponents[0], headComponents[1]);
+    }
+
+    public static Object[] GetParams(Method method, Message message){
+
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        Object[] parameters = new Object[parameterTypes.length];
+        IntStream.range(0, parameterTypes.length).forEach(
+                i -> parameters[i] = NetworkUtils.deserializeObject(
+                        message.getBody().get(i),
+                        parameterTypes[i]
+                )
+        );
+
+        return parameters;
+    }
 
     public static Message handleTask(Message message) throws Exception
     {
-        // SPLIT THIS FUNCTION INTO SMALLER ONE
-        // SINGLE RESPONSIBILITY PRINCIPLE ( ASK GABI IF YOU DON'T KNOW )
-        var headerComponents = message.getHeader().split(":");
-        if(headerComponents.length != 2)
-            throw new Exception("Invalid Header"); // MAKE GOOD EXCEPTION
+        var headerParts = splitHeader(message);
 
-        var controllerName = message.getHeader().split(":")[0];
-        System.out.println(controllerName);
-        if(!ControllerMapper.mapper.containsKey(controllerName))
+        if(!ControllerMapper.mapper.containsKey(headerParts.controller))
             throw new InexistentEntity("No such controller");
 
-        var controller = ControllerMapper.mapper.get(controllerName);
-
-        var methodName = message.getHeader().split(":")[1];
-
-        // CHECK IF METHOD EXIST IN CONTROLLER
-
+        var controller = ControllerMapper.mapper.get(headerParts.controller);
         var controllerClass = controller.getClass();
+
+
         try{
-            Method method = Arrays.stream(controllerClass.getDeclaredMethods())
+            var method = Arrays.stream(controllerClass.getDeclaredMethods())
                     .filter(m -> m
                             .getName()
-                            .equals(methodName))
+                            .equals(headerParts.method))
                     .findAny()
                     .orElseThrow(NoSuchMethodException::new);
 
-            Class<?>[] parameterTypes = method.getParameterTypes();
+            var parameterTypes = method.getParameterTypes();
 
             if (parameterTypes.length != message.getBody().size())
             {
                 throw new IndexOutOfBoundsException();
             }
-//          This should work , test later
-//            ArrayList<Object> parameters = new ArrayList<>();
-//            IntStream.range(0, parameterTypes.length).forEach(
-//                    i -> {
-//                        parameters.set(i, NetworkUtils.deserializeObject(
-//                                message.getBody().get(i),
-//                                parameterTypes[i]
-//                        ));
-//                    }
-//            );
-            Object[] parameters = new Object[parameterTypes.length];
-            IntStream.range(0, parameterTypes.length).forEach(
-                    i -> parameters[i] = NetworkUtils.deserializeObject(
-                            message.getBody().get(i),
-                            parameterTypes[i]
-                    )
-            );
-            Object returnedValue = method.invoke(controller, parameters);
+
+            var parameters = GetParams(method, message);
+
+            var returnedValue = method.invoke(controller, parameters);
+
             if (method.getReturnType().equals(Iterable.class))
             {
                 List<String> values = StreamSupport
                         .stream(((Iterable<?>) returnedValue).spliterator(), false)
                         .map(NetworkUtils::serialiseObject)
                         .collect(Collectors.toList());
-                return NetworkUtils.success(values);
+                return NetworkUtils.successMessage(values);
             }
-            else if (method.getReturnType().equals(Double.class))
-            {
-                ArrayList<String> values = new ArrayList<>();
-                values.add(NetworkUtils.serialiseObject(returnedValue));
-                return NetworkUtils.success(values);
-            }
-            return NetworkUtils.success(null);
+            return NetworkUtils.successMessage(null);
         }
         catch(Exception e){
             e.printStackTrace();
         }
 
 
-        return null;
+        return NetworkUtils.failMessage();
     }
 }

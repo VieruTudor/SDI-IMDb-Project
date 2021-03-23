@@ -58,12 +58,16 @@ public class NetworkUtils {
         }
     }
 
-    public static Message success(List<String> value)
+    public static Message successMessage(List<String> value)
     {
         Message message = new Message("success");
         if (value != null)
             value.forEach(message::addRow);
         return message;
+    }
+
+    public static Message failMessage(){
+        return new Message("fail");
     }
 
     @SuppressWarnings({"unchecked"})

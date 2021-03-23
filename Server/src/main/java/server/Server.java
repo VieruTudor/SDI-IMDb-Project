@@ -24,7 +24,7 @@ public class Server {
             System.out.println("server started ");
             while(running){
                 Socket client = serverSocket.accept();
-                executorService.submit(new server.HandleRequest(client));
+                executorService.submit(new HandleRequest(client));
             }
 
             executorService.shutdown();
