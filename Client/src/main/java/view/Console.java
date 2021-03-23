@@ -348,20 +348,15 @@ public class Console {
     }
 
     public void showActors(){
-
-        try{
-            CompletableFuture<Iterable<Actor>> nume = CompletableFuture.supplyAsync(() ->
-            {
-                var result = this.actorController.getAllActors();
-            }).thenApply(t -> {
-                var result = t
-            })
-            //CompletableFuture.supplyAsync(());
-            System.out.println(result);
-        }
-        catch (RuntimeException e) {
+        try {
+            this.actorController.getAllActors().thenApply( t -> {
+                    t.forEach(System.out::println);
+            return null;}
+            );
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     public void showPlaysIn(){
@@ -376,11 +371,14 @@ public class Console {
 
     private void showDirectors(){
         try {
-            var result = this.directorController.getAllDirectors().join();
-            System.out.println(result);
+            this.directorController.getAllDirectors().thenApply( t -> {
+                t.forEach(System.out::println);
+                return null;}
+            );
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     private String getField(String field) throws IOException {
