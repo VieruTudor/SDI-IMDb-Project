@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class Console {
@@ -347,11 +348,18 @@ public class Console {
     }
 
     public void showActors(){
+
         try{
-            var result = this.actorController.getAllActors().get();
+            CompletableFuture<Iterable<Actor>> nume = CompletableFuture.supplyAsync(() ->
+            {
+                var result = this.actorController.getAllActors();
+            }).thenApply(t -> {
+                var result = t
+            })
+            //CompletableFuture.supplyAsync(());
             System.out.println(result);
         }
-        catch (InterruptedException | ExecutionException e) {
+        catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -368,9 +376,9 @@ public class Console {
 
     private void showDirectors(){
         try {
-            var result = this.directorController.getAllDirectors().get();
+            var result = this.directorController.getAllDirectors().join();
             System.out.println(result);
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -2,6 +2,7 @@ package controller;
 
 import domain.Director;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 public interface IDirectorController {
@@ -11,7 +12,7 @@ public interface IDirectorController {
 
     Future<Void> updateDirector(int id, String name, int age);
 
-    Future<Iterable<Director>> getAllDirectors();
+    CompletableFuture<Iterable<Director>> getAllDirectors();
 
     Future<Iterable<Director>> getDirectorsWithAgeSmallerThen(int margin);
 

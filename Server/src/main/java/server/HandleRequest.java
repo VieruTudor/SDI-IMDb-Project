@@ -21,15 +21,14 @@ public class HandleRequest implements Runnable {
 
         try (InputStream inputStream = client.getInputStream();
              OutputStream outputStream = client.getOutputStream()) {
+
             var message = Message.read(inputStream);
             var response = server.HandleTask.handleTask(message);
             Objects.requireNonNull(response, "Error computing the response");
-
             Message.write(response, outputStream);
             client.close();
 
         }
-        // remove this somehow
         catch(Exception e){
             e.printStackTrace();
         }

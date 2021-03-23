@@ -5,9 +5,7 @@ import networking.Message;
 import networking.TCPClient;
 import networking.Utils.NetworkUtils;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class ActorController implements IActorController{
@@ -19,7 +17,7 @@ public class ActorController implements IActorController{
     }
 
     @Override
-    public Future<Void> addActor(int id, String name, int age, int fame) {
+    public CompletableFuture<Void> addActor(int id, String name, int age, int fame) {
         Callable<Void> callable = () ->
         {
             Message message = new Message("ActorController:addActor");
@@ -38,12 +36,20 @@ public class ActorController implements IActorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                return null;
+            }
+        },executorService);
 
     }
 
     @Override
-    public Future<Void> deleteActor(int id) {
+    public CompletableFuture<Void> deleteActor(int id) {
         Callable<Void> callable = () ->
         {
             Message message = new Message("ActorController:deleteActor");
@@ -55,11 +61,19 @@ public class ActorController implements IActorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                return null;
+            }
+        },executorService);
     }
 
     @Override
-    public Future<Void> updateActor(int id, String name, int age, int fame) {
+    public CompletableFuture<Void> updateActor(int id, String name, int age, int fame) {
         Callable<Void> callable = () ->
         {
             Message message = new Message("ActorController:updateActor");
@@ -76,11 +90,19 @@ public class ActorController implements IActorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                return null;
+            }
+        },executorService);
     }
 
     @Override
-    public Future<Iterable<Actor>> getAllActors() {
+    public CompletableFuture<Iterable<Actor>> getAllActors() {
         Callable<Iterable<Actor>> callable = () ->
         {
             Message message = new Message("ActorController:getAllActors");
@@ -97,11 +119,19 @@ public class ActorController implements IActorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        });
     }
 
     @Override
-    public Future<Iterable<Actor>> getActorsWithFameBetween(int lower, int upper) {
+    public CompletableFuture<Iterable<Actor>> getActorsWithFameBetween(int lower, int upper) {
         Callable<Iterable<Actor>> callable = () ->
         {
             Message message = new Message("ActorController:getActorsWithFameBetween");
@@ -117,11 +147,19 @@ public class ActorController implements IActorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                return null;
+            }
+        },executorService);
     }
 
     @Override
-    public Future<Double> getPercentageOfFamousActors(int fame) {
+    public CompletableFuture<Double> getPercentageOfFamousActors(int fame) {
         Callable<Double> callable = () ->
         {
             Message message = new Message("ActorController:getPercentageOfFamousActors");
@@ -136,6 +174,14 @@ public class ActorController implements IActorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                return null;
+            }
+        },executorService);
     }
 }

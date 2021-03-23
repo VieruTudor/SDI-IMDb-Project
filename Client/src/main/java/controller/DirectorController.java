@@ -5,9 +5,7 @@ import networking.Message;
 import networking.TCPClient;
 import networking.Utils.NetworkUtils;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class DirectorController implements IDirectorController{
@@ -78,7 +76,7 @@ public class DirectorController implements IDirectorController{
     }
 
     @Override
-    public Future<Iterable<Director>> getAllDirectors() {
+    public CompletableFuture<Iterable<Director>> getAllDirectors() {
         Callable<Iterable<Director>> callable = () ->
         {
             Message message = new Message("DirectorController:getAllDirectors");
@@ -95,7 +93,14 @@ public class DirectorController implements IDirectorController{
             NetworkUtils.checkException(response);
             throw new RuntimeException("Received response was invalid");
         };
-        return executorService.submit(callable);
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        });
     }
 
     @Override

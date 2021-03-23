@@ -24,6 +24,7 @@ public class Server {
             System.out.println("server started ");
             while(running){
                 Socket client = serverSocket.accept();
+                System.out.println(client.getLocalAddress());
                 executorService.submit(new HandleRequest(client));
             }
 
