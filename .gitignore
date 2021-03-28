@@ -17,14 +17,14 @@ node_modules
 *.iml
 *.ipr
 *.iws
-.idea
+socket/.idea
 build
 out
 generated
 MANIFEST.MF
 
 #gradle
-gradle
+socket/gradle
 .gradle
 
 
