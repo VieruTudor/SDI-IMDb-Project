@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bde3f636-0404-449e-a862-402a2fcd09b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Server/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Server/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="bde3f636-0404-449e-a862-402a2fcd09b0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +156,7 @@
       <option name="presentableId" value="Default" />
       <updated>1616951146671</updated>
       <workItem from="1616951152317" duration="1632000" />
-      <workItem from="1616952838140" duration="4339000" />
+      <workItem from="1616952838140" duration="4652000" />
     </task>
     <servers />
   </component>
