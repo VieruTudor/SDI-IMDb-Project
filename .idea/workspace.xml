@@ -3,27 +3,11 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9f6340c-5153-4781-bae7-3827310c1adb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="ffe9d521-ce85-4b74-bf8a-eeee74f5e536" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,228 +16,54 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$">
+    <projectState path="$PROJECT_DIR$/remoting">
       <ProjectState />
     </projectState>
-  </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="lab5x" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
+    <projectState path="$PROJECT_DIR$/socket">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.2\plugins\maven\lib\maven3" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="1q4EbnnUVGGJBze8njRULRekLZQ" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="1qO0HUURLKO9jnaxbv4fQTi1Agm" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
-    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Server/src/main/java/repository" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Server\src\main\java\repository" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Server\src\main\java\database\serializers" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common\domain\serializers" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common\domain" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common\src\main" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common\src\java" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common\src" />
-      <recent name="D:\University\2nd Semester\SDI\lab5x-team-onlyfans\Common\domain\serializers\csv" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Main (1)">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="lab5x.Client.main" />
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="lab5x.server.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="lab5x-team-onlyfans [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Gradle.lab5x-team-onlyfans [dependencies]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b9f6340c-5153-4781-bae7-3827310c1adb" name="Default Changelist" comment="" />
-      <created>1616330535716</created>
+      <changelist id="ffe9d521-ce85-4b74-bf8a-eeee74f5e536" name="Default Changelist" comment="" />
+      <created>1616935241018</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1616330535716</updated>
-      <workItem from="1616330536887" duration="7088000" />
-      <workItem from="1616406379092" duration="3220000" />
-      <workItem from="1616414421801" duration="2100000" />
-      <workItem from="1616417903408" duration="53000" />
-      <workItem from="1616433573937" duration="2235000" />
-      <workItem from="1616435849507" duration="6485000" />
-      <workItem from="1616515318416" duration="2672000" />
-      <workItem from="1616923677842" duration="46000" />
-      <workItem from="1616936292419" duration="1022000" />
+      <updated>1616935241018</updated>
+      <workItem from="1616935243475" duration="312000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616414674190">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616414674190" />
-    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser" timestamp="1616441522996">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616441522996" />
-    <state x="535" y="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616436005140">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="535" y="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616436005140" />
-    <state width="1493" height="340" key="GridCell.Tab.0.bottom" timestamp="1616444698633">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state width="1493" height="340" key="GridCell.Tab.0.center" timestamp="1616444698632">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698632" />
-    <state width="1493" height="340" key="GridCell.Tab.0.left" timestamp="1616444698632">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698632" />
-    <state width="1493" height="340" key="GridCell.Tab.0.right" timestamp="1616444698633">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state width="1493" height="340" key="GridCell.Tab.1.bottom" timestamp="1616444698633">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state width="1493" height="340" key="GridCell.Tab.1.center" timestamp="1616444698633">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state width="1493" height="340" key="GridCell.Tab.1.left" timestamp="1616444698633">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state width="1493" height="340" key="GridCell.Tab.1.right" timestamp="1616444698633">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="340" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state x="338" y="40" key="SettingsEditor" timestamp="1616443790989">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="338" y="40" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616443790989" />
-    <state x="244" y="24" key="new project wizard" timestamp="1616340160715">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="244" y="24" key="new project wizard/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616340160715" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1616338892491">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616338892491" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1616414796520">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616414796520" />
   </component>
 </project>
