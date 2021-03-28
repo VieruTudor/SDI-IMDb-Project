@@ -1,0 +1,6 @@
+rootProject.name = 'lab5x'
+include 'server'
+include 'Client'
+include 'Common'
+
+project(':Common').projectDir = new File("Common")

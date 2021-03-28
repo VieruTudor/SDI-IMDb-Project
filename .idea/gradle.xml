@@ -4,6 +4,19 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/remoting" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/remoting" />
+            <option value="$PROJECT_DIR$/remoting/Client" />
+            <option value="$PROJECT_DIR$/remoting/Common" />
+            <option value="$PROJECT_DIR$/remoting/Server" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/socket" />
         <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
