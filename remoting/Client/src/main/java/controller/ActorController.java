@@ -4,17 +4,17 @@ import domain.Actor;
 import networking.Message;
 import networking.TCPClient;
 import networking.Utils.NetworkUtils;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-public class ActorController implements IActorController{
+public class ActorController implements FutureActorController {
 
-    private final ExecutorService executorService;
+    @Autowired
+    private ExecutorService executorService;
 
-    public ActorController(ExecutorService executorService){
-        this.executorService = executorService;
-    }
+    @Autowired
+    private IActorController actorController;
 
     @Override
     public CompletableFuture<Void> addActor(int id, String name, int age, int fame) {
@@ -44,7 +44,7 @@ public class ActorController implements IActorController{
             } finally {
                 return null;
             }
-        },executorService);
+        });
 
     }
 
@@ -103,31 +103,8 @@ public class ActorController implements IActorController{
 
     @Override
     public CompletableFuture<Iterable<Actor>> getAllActors() {
-        Callable<Iterable<Actor>> callable = () ->
-        {
-            Message message = new Message("ActorController:getAllActors");
-            Message response = TCPClient.sendAndReceive(message);
-            if (NetworkUtils.isSuccess(response))
-            {
-                return response.getBody().stream()
-                        .map(string -> NetworkUtils.deserializeObject(
-                                string,
-                                Actor.class
-                        ))
-                        .collect(Collectors.toUnmodifiableList());
-            }
-            NetworkUtils.checkException(response);
-            throw new RuntimeException("Received response was invalid");
-        };
-
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return callable.call();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return null;
-            }
-        });
+        /// TODO : Implement with callable, invoke, rmi, whatever
+        return null;
     }
 
     @Override

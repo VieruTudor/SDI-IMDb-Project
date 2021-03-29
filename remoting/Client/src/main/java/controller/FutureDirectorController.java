@@ -5,7 +5,7 @@ import domain.Director;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
-public interface IDirectorController {
+public interface FutureDirectorController {
     Future<Void> addDirector(int id, String name, int age);
 
     Future<Void> deleteDirector(int id);

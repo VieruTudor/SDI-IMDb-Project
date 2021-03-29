@@ -4,7 +4,7 @@ import domain.Actor;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface IActorController {
+public interface FutureActorController {
     CompletableFuture<Void> addActor(int id, String name, int age, int fame);
 
     CompletableFuture<Void> deleteActor(int id);

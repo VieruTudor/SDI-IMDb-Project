@@ -4,18 +4,17 @@ import domain.PlaysIn;
 import networking.Message;
 import networking.TCPClient;
 import networking.Utils.NetworkUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-public class PlaysInController implements IPlaysInController{
-    private final ExecutorService executorService;
+public class PlaysInController implements FuturePlaysInController {
+    @Autowired
+    private ExecutorService executorService;
 
-    public PlaysInController(ExecutorService executorService){
-        this.executorService = executorService;
-    }
     @Override
     public Future<Void> addPlaysIn(int movieId, int actorId, String role) {
         Callable<Void> callable = () ->

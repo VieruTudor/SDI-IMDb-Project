@@ -4,7 +4,7 @@ import domain.PlaysIn;
 
 import java.util.concurrent.Future;
 
-public interface IPlaysInController {
+public interface FuturePlaysInController {
     Future<Void> addPlaysIn(int movieId, int actorId, String role);
 
     Future<Void> deletePlaysIn(int movieId, int actorId);

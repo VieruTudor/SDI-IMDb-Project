@@ -23,8 +23,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9f6340c-5153-4781-bae7-3827310c1adb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/ActorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/ActorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/DirectorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/DirectorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IActorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FutureActorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IDirectorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FutureDirectorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FutureMovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IPlaysInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FuturePlaysInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/PlaysInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/PlaysInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/view/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/view/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/remoting/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +47,9 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/remoting">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -42,12 +57,15 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/remoting">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="lab5x" type="f1a62948:ProjectNode" />
+                <item name="lab5x-team-onlyfans" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -88,7 +106,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Server/src/main/java/repository" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/remoting/build.gradle" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -96,8 +115,8 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
@@ -127,7 +146,18 @@
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="lab5x.server.main" />
+      <module name="lab5x-team-onlyfans" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -151,11 +181,49 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="lab5x-team-onlyfans" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="remoting [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/remoting" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.remoting [dependencies]" />
         <item itemvalue="Gradle.lab5x-team-onlyfans [dependencies]" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.lab5x-team-onlyfans" />
+        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -176,6 +244,13 @@
       <workItem from="1616515318416" duration="2672000" />
       <workItem from="1616923677842" duration="46000" />
       <workItem from="1616936292419" duration="807000" />
+      <workItem from="1616940396735" duration="357000" />
+      <workItem from="1616957743228" duration="1387000" />
+      <workItem from="1616959544772" duration="488000" />
+      <workItem from="1616960055527" duration="596000" />
+      <workItem from="1616960676693" duration="143000" />
+      <workItem from="1616960839247" duration="3873000" />
+      <workItem from="1617015391130" duration="1929000" />
     </task>
     <servers />
   </component>
@@ -195,34 +270,42 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616414674190">
+    <state x="539" y="0" key="#Auto_Import" timestamp="1616963020931">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616414674190" />
-    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser" timestamp="1616441522996">
+    <state x="539" y="0" key="#Auto_Import/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616963020931" />
+    <state x="361" y="63" width="1089" height="761" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616959804877">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616441522996" />
+    <state x="361" y="63" width="1089" height="761" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616959804877" />
+    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser" timestamp="1617015635531">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1617015635531" />
     <state x="535" y="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616436005140">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="535" y="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616436005140" />
-    <state width="1493" height="340" key="GridCell.Tab.0.bottom" timestamp="1616444698633">
+    <state x="686" y="199" key="FileChooserDialogImpl" timestamp="1616960993713">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state width="1493" height="340" key="GridCell.Tab.0.center" timestamp="1616444698632">
+    <state x="686" y="199" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616960993713" />
+    <state width="1493" height="92" key="GridCell.Tab.0.bottom" timestamp="1616965766332">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698632" />
-    <state width="1493" height="340" key="GridCell.Tab.0.left" timestamp="1616444698632">
+    <state width="1493" height="92" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616965766332" />
+    <state width="1493" height="92" key="GridCell.Tab.0.center" timestamp="1616965766331">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698632" />
-    <state width="1493" height="340" key="GridCell.Tab.0.right" timestamp="1616444698633">
+    <state width="1493" height="92" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616965766331" />
+    <state width="1493" height="92" key="GridCell.Tab.0.left" timestamp="1616965766331">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="340" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
+    <state width="1493" height="92" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616965766331" />
+    <state width="1493" height="92" key="GridCell.Tab.0.right" timestamp="1616965766332">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="92" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616965766332" />
     <state width="1493" height="340" key="GridCell.Tab.1.bottom" timestamp="1616444698633">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -239,21 +322,33 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="340" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616444698633" />
-    <state x="338" y="40" key="SettingsEditor" timestamp="1616443790989">
+    <state x="338" y="0" key="SettingsEditor" timestamp="1617015844363">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="338" y="40" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616443790989" />
-    <state x="244" y="24" key="new project wizard" timestamp="1616340160715">
+    <state x="338" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1617015844363" />
+    <state x="587" y="322" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616963523520">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="244" y="24" key="new project wizard/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616340160715" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1616338892491">
+    <state x="587" y="322" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616963523520" />
+    <state x="244" y="0" key="new project wizard" timestamp="1617015836940">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616338892491" />
+    <state x="244" y="0" key="new project wizard/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1617015836940" />
+    <state x="553" y="152" key="refactoring.ChangeSignatureDialog" timestamp="1616965502478">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="553" y="152" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616965502478" />
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1616960987478">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616960987478" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1616414796520">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1616414796520" />
+    <state x="428" y="11" key="spring file set editor" timestamp="1617017160854">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="428" y="11" key="spring file set editor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1617017160854" />
   </component>
 </project>

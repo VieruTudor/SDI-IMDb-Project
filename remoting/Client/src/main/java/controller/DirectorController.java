@@ -4,16 +4,16 @@ import domain.Director;
 import networking.Message;
 import networking.TCPClient;
 import networking.Utils.NetworkUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-public class DirectorController implements IDirectorController{
-    private final ExecutorService executorService;
+public class DirectorController implements FutureDirectorController {
 
-    public DirectorController(ExecutorService executorService){
-        this.executorService = executorService;
-    }
+    @Autowired
+    private ExecutorService executorService;
+
     @Override
     public Future<Void> addDirector(int id, String name, int age) {
         Callable<Void> callable = () ->

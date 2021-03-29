@@ -4,7 +4,7 @@ import domain.Movie;
 
 import java.util.concurrent.Future;
 
-public interface IMovieController {
+public interface FutureMovieController {
     Future<Void> addMovie(int id, String name, int rating, int year, int directorId);
 
     Future<Void> deleteMovie(int id);

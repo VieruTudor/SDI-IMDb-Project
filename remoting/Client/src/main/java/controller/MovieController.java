@@ -4,18 +4,18 @@ import domain.Movie;
 import networking.Message;
 import networking.TCPClient;
 import networking.Utils.NetworkUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-public class MovieController implements IMovieController{
-    private final ExecutorService executorService;
+public class MovieController implements FutureMovieController {
 
-    public MovieController(ExecutorService executorService){
-        this.executorService = executorService;
-    }
+    @Autowired
+    private ExecutorService executorService;
+
 
     @Override
     public Future<Void> addMovie(int id, String name, int rating, int year, int directorId) {

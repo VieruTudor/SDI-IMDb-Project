@@ -2,6 +2,7 @@ package view;
 
 import controller.*;
 import exception.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,12 +12,31 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
+import javax.annotation.PostConstruct;
 
 public class Console {
-    private ActorController actorController;
-    private DirectorController directorController;
-    private MovieController movieController;
-    private PlaysInController playsInController;
+    public static FutureActorController actorController;
+    public static FutureDirectorController directorController;
+    public static FutureMovieController movieController;
+    public static FuturePlaysInController playsInController;
+
+    @Autowired
+    private ActorController autowiredActorController;
+    @Autowired
+    private MovieController autowiredMovieController;
+    @Autowired
+    private DirectorController autowiredDirectorController;
+    @Autowired
+    private PlaysInController autowiredPlaysInController;
+
+    @PostConstruct
+    private void initialize() {
+        actorController = autowiredActorController;
+        movieController = autowiredMovieController;
+        directorController = autowiredDirectorController;
+        playsInController = autowiredPlaysInController;
+    }
+
     HashMap<String, Runnable> commands = new HashMap<>();
     BufferedReader reader;
     StringBuilder commandsMenu = new StringBuilder();
@@ -26,13 +46,12 @@ public class Console {
         Files.readAllLines(path).stream().forEach(t -> commandsMenu.append(t).append("\n"));
     }
 
-    public Console(ActorController actorController, DirectorController directorController, MovieController movieController, PlaysInController playsInController) throws IOException {
-        readMenu();
-        this.actorController = actorController;
-        this.directorController = directorController;
-        this.movieController = movieController;
-        this.playsInController = playsInController;
-        this.reader = new BufferedReader(new InputStreamReader(System.in));
+    public Console() {
+        try {
+            readMenu();
+            this.reader = new BufferedReader(new InputStreamReader(System.in));
+        } catch (Exception ignored) {
+        }
         this.commands.put("help", () -> System.out.println(this.commandsMenu.toString()));
         //add
         this.commands.put("add movie", this::addMovie);
@@ -67,20 +86,20 @@ public class Console {
     }
 
     private void reportDirectors() {
-        try{
+        try {
             var age = Integer.parseInt(this.getField("age"));
-            Double percentage = this.directorController.getPercentageOfYoungDirectors(age).get();
+            Double percentage = directorController.getPercentageOfYoungDirectors(age).get();
             System.out.println(percentage + "% of directors are young");
 
         } catch (IOException | InterruptedException | ExecutionException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
     }
 
     private void reportMovies() {
-        try{
+        try {
             var decade = Integer.parseInt(this.getField("decade"));
-            Double percentage = this.movieController.getPercentageOfMoviesThisDecade(decade).get();
+            Double percentage = movieController.getPercentageOfMoviesThisDecade(decade).get();
             System.out.println(percentage + "% of movies appeared this decade");
 
         } catch (IOException | InterruptedException | ExecutionException e) {
@@ -89,9 +108,9 @@ public class Console {
     }
 
     private void reportActors() {
-        try{
+        try {
             var fame = Integer.parseInt(this.getField("fame"));
-            Double percentage = this.actorController.getPercentageOfFamousActors(fame).get();
+            Double percentage = actorController.getPercentageOfFamousActors(fame).get();
             System.out.println(percentage + "% of actors are famous");
 
         } catch (IOException | InterruptedException | ExecutionException e) {
@@ -100,9 +119,9 @@ public class Console {
     }
 
     private void reportPlaysIn() {
-        try{
+        try {
             var role = this.getField("Role:");
-            Double percent = this.playsInController.getPercentageOfRolesOfActors(role).get();
+            Double percent = playsInController.getPercentageOfRolesOfActors(role).get();
             System.out.println(percent + "% of actors have " + role + " as their role");
         } catch (IOException | InterruptedException | ExecutionException e) {
             System.out.println(e.getMessage());
@@ -113,7 +132,7 @@ public class Console {
         System.out.println("Here you can see the directors younger then an inputted age");
         try {
             var age = Integer.parseInt(this.getField("Age:"));
-            var directors = this.directorController.getDirectorsWithAgeSmallerThen(age).get();
+            var directors = directorController.getDirectorsWithAgeSmallerThen(age).get();
             directors.forEach(System.out::println);
 
         } catch (InterruptedException | ExecutionException | IOException e) {
@@ -126,7 +145,7 @@ public class Console {
         System.out.println("Here you can see the relations of movies and actors based on the roles");
         try {
             var role = this.getField("Role:");
-            var playsIns = this.playsInController.getPlayInRelationAfterRole(role).get();
+            var playsIns = playsInController.getPlayInRelationAfterRole(role).get();
             playsIns.forEach(System.out::println);
 
         } catch (InterruptedException | ExecutionException | IOException e) {
@@ -139,7 +158,7 @@ public class Console {
         System.out.println("Here you can see the movies that have a rating greater then the one you insert");
         try {
             var rating = Integer.parseInt(this.getField("Rating:"));
-            var movies = this.movieController.getMoviesWithRatingHigherThan(rating).get();
+            var movies = movieController.getMoviesWithRatingHigherThan(rating).get();
             movies.forEach(System.out::println);
 
         } catch (InterruptedException | ExecutionException | IOException e) {
@@ -153,7 +172,7 @@ public class Console {
         try {
             var low = Integer.parseInt(this.getField("Low value:"));
             var high = Integer.parseInt(this.getField("High value:"));
-            var actors = this.actorController.getActorsWithFameBetween(low, high).get();
+            var actors = actorController.getActorsWithFameBetween(low, high).get();
             actors.forEach(System.out::println);
 
         } catch (InterruptedException | ExecutionException | IOException e) {
@@ -167,7 +186,7 @@ public class Console {
             var id = Integer.parseInt(this.getField("ID:"));
             var name = this.getField("Name:");
             var age = Integer.parseInt(this.getField("Age:"));
-            this.directorController.updateDirector(id, name, age);
+            directorController.updateDirector(id, name, age);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -180,7 +199,7 @@ public class Console {
             var movieID = Integer.parseInt(this.getField("Movie ID:"));
             var actorID = Integer.parseInt(this.getField("Actor ID:"));
             var role = this.getField("Role:");
-            this.playsInController.updatePlaysIn(movieID, actorID, role);
+            playsInController.updatePlaysIn(movieID, actorID, role);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -195,7 +214,7 @@ public class Console {
             var rating = Integer.parseInt(this.getField("Rating:"));
             var year = Integer.parseInt(this.getField("Year:"));
             var directorID = Integer.parseInt(this.getField("Director ID:"));
-            this.movieController.updateMovie(id, name, rating, year, directorID);
+            movieController.updateMovie(id, name, rating, year, directorID);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -209,7 +228,7 @@ public class Console {
             var name = this.getField("Name:");
             var age = Integer.parseInt(this.getField("Age:"));
             var fame = Integer.parseInt(this.getField("Fame:"));
-            this.actorController.updateActor(id, name, age, fame);
+            actorController.updateActor(id, name, age, fame);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -220,8 +239,8 @@ public class Console {
     private void deleteDirector() {
         try {
             var id = Integer.parseInt(this.getField("ID:"));
-            this.directorController.deleteDirector(id);
-        } catch (IOException | InexistentEntity e ) {
+            directorController.deleteDirector(id);
+        } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.deleteDirector();
         }
@@ -231,7 +250,7 @@ public class Console {
         try {
             var movieID = Integer.parseInt(this.getField("Movie ID:"));
             var actorID = Integer.parseInt(this.getField("Actor ID:"));
-            this.playsInController.deletePlaysIn(movieID, actorID);
+            playsInController.deletePlaysIn(movieID, actorID);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.deletePlaysIn();
@@ -241,7 +260,7 @@ public class Console {
     private void deleteMovie() {
         try {
             var id = Integer.parseInt(this.getField("ID:"));
-            this.movieController.deleteMovie(id);
+            movieController.deleteMovie(id);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.deleteMovie();
@@ -251,7 +270,7 @@ public class Console {
     private void deleteActor() {
         try {
             var id = Integer.parseInt(this.getField("ID:"));
-            this.actorController.deleteActor(id);
+            actorController.deleteActor(id);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.deleteActor();
@@ -266,7 +285,7 @@ public class Console {
             var name = reader.readLine();
             System.out.println("Age");
             var age = Integer.parseInt(reader.readLine());
-            this.directorController.addDirector(id, name, age);
+            directorController.addDirector(id, name, age);
         } catch (IOException | ValidException | DuplicateException e) {
             System.out.println(e.getMessage());
             this.addDirector();
@@ -285,7 +304,7 @@ public class Console {
             var year = Integer.parseInt(reader.readLine());
             System.out.println("Director Id:");
             var directorId = Integer.parseInt(reader.readLine());
-            this.movieController.addMovie(id, name, rating, year, directorId);
+            movieController.addMovie(id, name, rating, year, directorId);
         } catch (IOException | ValidException | DuplicateException e) {
             System.out.println(e.getMessage());
             this.addMovie();
@@ -302,7 +321,7 @@ public class Console {
             var age = Integer.parseInt(reader.readLine());
             System.out.println("Fame:");
             var fame = Integer.parseInt(reader.readLine());
-            this.actorController.addActor(id, name, age, fame);
+            actorController.addActor(id, name, age, fame);
         } catch (IOException | ValidException | DuplicateException e) {
             System.out.println(e.getMessage());
             this.addActor();
@@ -318,28 +337,28 @@ public class Console {
             System.out.println("Role: ");
             var role = reader.readLine();
 
-            this.playsInController.addPlaysIn(movieId, actorId, role);
-        } catch (IOException | ValidException | DuplicateException e ) {
+            playsInController.addPlaysIn(movieId, actorId, role);
+        } catch (IOException | ValidException | DuplicateException e) {
             System.out.println(e.getMessage());
             this.addPlaysIn();
         }
     }
 
-    public void showMovies(){
-        try{
-            var result = this.movieController.getAllMovies().get();
+    public void showMovies() {
+        try {
+            var result = movieController.getAllMovies().get();
             System.out.println(result);
-        }
-        catch (InterruptedException | ExecutionException e){
+        } catch (InterruptedException | ExecutionException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void showActors(){
+    public void showActors() {
         try {
-            this.actorController.getAllActors().thenApply( t -> {
-                    t.forEach(System.out::println);
-            return null;}
+            actorController.getAllActors().thenApply(t -> {
+                        t.forEach(System.out::println);
+                        return null;
+                    }
             );
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
@@ -347,21 +366,21 @@ public class Console {
 
     }
 
-    public void showPlaysIn(){
-        try{
-            var result = this.playsInController.getAllPlaysIn().get();
+    public void showPlaysIn() {
+        try {
+            var result = playsInController.getAllPlaysIn().get();
             System.out.println(result);
-        }
-        catch (InterruptedException | ExecutionException e) {
-        System.out.println(e.getMessage());
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private void showDirectors(){
+    private void showDirectors() {
         try {
-            this.directorController.getAllDirectors().thenApply( t -> {
-                t.forEach(System.out::println);
-                return null;}
+            directorController.getAllDirectors().thenApply(t -> {
+                        t.forEach(System.out::println);
+                        return null;
+                    }
             );
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
@@ -390,7 +409,8 @@ public class Console {
 
         }
     }
-    public static String handleException(ProgramException e){
+
+    public static String handleException(ProgramException e) {
         return e.getMessage();
     }
 }
