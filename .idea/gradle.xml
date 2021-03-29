@@ -4,11 +4,30 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/remoting" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/remoting" />
+            <option value="$PROJECT_DIR$/remoting/Client" />
+            <option value="$PROJECT_DIR$/remoting/Common" />
+            <option value="$PROJECT_DIR$/remoting/Server" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/socket" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/socket" />
+            <option value="$PROJECT_DIR$/socket/Client" />
+            <option value="$PROJECT_DIR$/socket/Common" />
+            <option value="$PROJECT_DIR$/socket/Server" />
           </set>
         </option>
       </GradleProjectSettings>
