@@ -22,22 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9f6340c-5153-4781-bae7-3827310c1adb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/ActorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/ActorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/DirectorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/DirectorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IActorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FutureActorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IDirectorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FutureDirectorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FutureMovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/IPlaysInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/FuturePlaysInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/PlaysInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/controller/PlaysInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/Client/src/main/java/view/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/Client/src/main/java/view/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remoting/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/remoting/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="b9f6340c-5153-4781-bae7-3827310c1adb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
