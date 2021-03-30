@@ -36,8 +36,12 @@ public class PlaysIn extends BaseEntity<Pair<Integer, Integer>> implements Seria
 
     @Override
     public boolean equals(Object o) {
-        PlaysIn playsIn = (PlaysIn) (o);
-        return this.getId().getFirst().equals(playsIn.getId().getFirst()) && this.getId().getSecond().equals(playsIn.getId().getSecond());
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlaysIn playsIn = (PlaysIn) o;
+        return movieID == playsIn.movieID &&
+                actorID == playsIn.actorID &&
+                Objects.equals(role, playsIn.role);
     }
 
     @Override

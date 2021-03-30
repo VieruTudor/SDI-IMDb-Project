@@ -1,5 +1,6 @@
 package database.adapters;
 
+import database.Database;
 import domain.Movie;
 import domain.Pair;
 import domain.PlaysIn;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +19,15 @@ public class PlaysInTableAdapter implements TableAdapter<Pair<Integer, Integer>,
 
     private RowMapper<PlaysIn> mapper = (resultSet, rowNumber) ->
     {
+        var movieid = resultSet.getInt("movieid");
+        var actorid = resultSet.getInt("actorid");
+        var role = resultSet.getString("role");
         PlaysIn playsIn = new PlaysIn(
-                resultSet.getInt("movieid"),
-                resultSet.getInt("actorid"),
-                resultSet.getString("role")
+                movieid,
+                actorid,
+                role
         );
+        playsIn.setId(new Pair<>(movieid, actorid));
         return playsIn;
     };
 
@@ -44,9 +50,8 @@ public class PlaysInTableAdapter implements TableAdapter<Pair<Integer, Integer>,
 
     @Override
     public Optional<PlaysIn> read(Pair<Integer, Integer> id) {
-        String query = "SELECT * FROM playin WHERE id = ?";
+        String query = String.format("SELECT * FROM playin WHERE movieid = %d AND actorid = %d", id.getFirst(), id.getSecond());
         List<PlaysIn> playsIns = jdbcOperations.query(query,
-                new Object[]{id},
                 mapper);
         if(playsIns.size() != 1){
             return Optional.empty();
@@ -56,13 +61,13 @@ public class PlaysInTableAdapter implements TableAdapter<Pair<Integer, Integer>,
 
     @Override
     public void update(PlaysIn entity) {
-        String query = "UPDATE playin SET movieid = ?, actorid = ?, role = ? WHERE id = ?";
-        jdbcOperations.update(query, entity.getId().getFirst(), entity.getId().getSecond(), entity.getRole());
+        String query = "UPDATE playin SET role = ? WHERE movieid = ? AND actorid = ?";
+        jdbcOperations.update(query, entity.getRole(), entity.getId().getFirst(), entity.getId().getSecond());
     }
 
     @Override
     public void delete(Pair<Integer, Integer> id) {
-        String query = "DELETE FROM playin WHERE id = ?";
-        jdbcOperations.update(query, id);
+        String query = "DELETE FROM playin WHERE movieid = ? AND actorid = ?";
+        jdbcOperations.update(query, id.getFirst(), id.getSecond());
     }
 }

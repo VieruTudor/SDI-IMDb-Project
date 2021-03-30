@@ -69,6 +69,11 @@ public class ActorController implements IActorController {
      */
     @Override
     public Iterable<Actor> getAllActors() {
+        try{
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            ;
+        }
         System.out.println(this.actors.length());
         return this.actors.findAll();
     }
