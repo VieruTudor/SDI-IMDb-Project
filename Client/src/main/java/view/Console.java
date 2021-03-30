@@ -91,240 +91,34 @@ public class Console {
         Files.readAllLines(path).stream().forEach(t -> commandsMenu.append(t).append("\n"));
     }
 
-    private void reportDirectors() {
-        try {
-            var age = Integer.parseInt(this.getField("age"));
-            Double percentage = directorController.getPercentageOfYoungDirectors(age).get();
-            System.out.println(percentage + "% of directors are young");
+    private String getField(String field) throws IOException {
+        System.out.println(field);
+        return reader.readLine();
+    }
 
-        } catch (IOException | InterruptedException | ExecutionException e) {
-            System.out.println(e.getMessage());
+
+    public void run() throws IOException {
+        while (true) {
+            System.out.println("help - for commands menu");
+            var command = reader.readLine();
+
+            if (command.equals("exit") || command.equals("quit"))
+                return;
+
+            else if (commands.containsKey(command))
+                commands.get(command).run();
+            else
+                System.out.println("No such command !");
         }
     }
 
-    private void reportMovies() {
-        try {
-            var decade = Integer.parseInt(this.getField("decade"));
-            Double percentage = movieController.getPercentageOfMoviesThisDecade(decade).get();
-            System.out.println(percentage + "% of movies appeared this decade");
-
-        } catch (IOException | InterruptedException | ExecutionException e) {
-            System.out.println(e.getMessage());
-        }
+    public static String handleException(ProgramException e) {
+        return e.getMessage();
     }
 
-    private void reportActors() {
-        try {
-            var fame = Integer.parseInt(this.getField("fame"));
-            CompletableFuture.supplyAsync(
-                    () -> actorController.getPercentageOfFamousActors(fame)
-            )
-                    .thenAcceptAsync(System.out::println);
 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void reportPlaysIn() {
-        try {
-            var role = this.getField("Role:");
-            Double percent = playsInController.getPercentageOfRolesOfActors(role).get();
-            System.out.println(percent + "% of actors have " + role + " as their role");
-        } catch (IOException | InterruptedException | ExecutionException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void filterDirector() {
-        System.out.println("Here you can see the directors younger then an inputted age");
-        try {
-            var age = Integer.parseInt(this.getField("Age:"));
-            var directors = directorController.getDirectorsWithAgeSmallerThen(age).get();
-            directors.forEach(System.out::println);
-
-        } catch (InterruptedException | ExecutionException | IOException e) {
-            System.out.println(e.getMessage());
-            this.filterDirector();
-        }
-    }
-
-    private void filterPlaysIn() {
-        System.out.println("Here you can see the relations of movies and actors based on the roles");
-        try {
-            var role = this.getField("Role:");
-            var playsIns = playsInController.getPlayInRelationAfterRole(role).get();
-            playsIns.forEach(System.out::println);
-
-        } catch (InterruptedException | ExecutionException | IOException e) {
-            System.out.println(e.getMessage());
-            this.filterPlaysIn();
-        }
-    }
-
-    private void filterMovie() {
-        System.out.println("Here you can see the movies that have a rating greater then the one you insert");
-        try {
-            var rating = Integer.parseInt(this.getField("Rating:"));
-            var movies = movieController.getMoviesWithRatingHigherThan(rating).get();
-            movies.forEach(System.out::println);
-
-        } catch (InterruptedException | ExecutionException | IOException e) {
-            System.out.println(e.getMessage());
-            this.filterMovie();
-        }
-    }
-
-    private void filterActor() {
-        System.out.println("Here you can see the actors that have a fame in a specific interval");
-        try {
-            var low = Integer.parseInt(this.getField("Low value:"));
-            var high = Integer.parseInt(this.getField("High value:"));
-            CompletableFuture.supplyAsync(
-                    () -> actorController.getActorsWithFameBetween(low, high)
-            )
-                    .thenAcceptAsync(actors -> actors.forEach(System.out::println));
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            this.filterActor();
-        }
-
-//
-//
-    }
-
-    private void updateDirector() {
-        try {
-            var id = Integer.parseInt(this.getField("ID:"));
-            var name = this.getField("Name:");
-            var age = Integer.parseInt(this.getField("Age:"));
-            directorController.updateDirector(id, name, age);
-
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.updateDirector();
-        }
-    }
-
-    private void updatePlaysIn() {
-        try {
-            var movieID = Integer.parseInt(this.getField("Movie ID:"));
-            var actorID = Integer.parseInt(this.getField("Actor ID:"));
-            var role = this.getField("Role:");
-            playsInController.updatePlaysIn(movieID, actorID, role);
-
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.updatePlaysIn();
-        }
-    }
-
-    private void updateMovie() {
-        try {
-            var id = Integer.parseInt(this.getField("ID:"));
-            var name = this.getField("Name:");
-            var rating = Integer.parseInt(this.getField("Rating:"));
-            var year = Integer.parseInt(this.getField("Year:"));
-            var directorID = Integer.parseInt(this.getField("Director ID:"));
-            movieController.updateMovie(id, name, rating, year, directorID);
-
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.updateMovie();
-        }
-    }
-
-    private void updateActor() {
-        try {
-            var id = Integer.parseInt(this.getField("ID:"));
-            var name = this.getField("Name:");
-            var age = Integer.parseInt(this.getField("Age:"));
-            var fame = Integer.parseInt(this.getField("Fame:"));
-            actorController.updateActor(id, name, age, fame);
-
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.updateActor();
-        }
-    }
-
-    private void deleteDirector() {
-        try {
-            var id = Integer.parseInt(this.getField("ID:"));
-            directorController.deleteDirector(id);
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.deleteDirector();
-        }
-    }
-
-    private void deletePlaysIn() {
-        try {
-            var movieID = Integer.parseInt(this.getField("Movie ID:"));
-            var actorID = Integer.parseInt(this.getField("Actor ID:"));
-            playsInController.deletePlaysIn(movieID, actorID);
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.deletePlaysIn();
-        }
-    }
-
-    private void deleteMovie() {
-        try {
-            var id = Integer.parseInt(this.getField("ID:"));
-            movieController.deleteMovie(id);
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.deleteMovie();
-        }
-    }
-
-    private void deleteActor() {
-        try {
-            var id = Integer.parseInt(this.getField("ID:"));
-            actorController.deleteActor(id);
-        } catch (IOException | InexistentEntity e) {
-            System.out.println(e.getMessage());
-            this.deleteActor();
-        }
-    }
-
-    private void addDirector() {
-        try {
-            System.out.println("ID:");
-            var id = Integer.parseInt(reader.readLine());
-            System.out.println("Name");
-            var name = reader.readLine();
-            System.out.println("Age");
-            var age = Integer.parseInt(reader.readLine());
-            directorController.addDirector(id, name, age);
-        } catch (IOException | ValidException | DuplicateException e) {
-            System.out.println(e.getMessage());
-            this.addDirector();
-        }
-    }
-
-    private void addMovie() {
-        try {
-            System.out.println("ID:");
-            var id = Integer.parseInt(reader.readLine());
-            System.out.println("Name:");
-            var name = reader.readLine();
-            System.out.println("Rating:");
-            var rating = Integer.parseInt(reader.readLine());
-            System.out.println("Year:");
-            var year = Integer.parseInt(reader.readLine());
-            System.out.println("Director Id:");
-            var directorId = Integer.parseInt(reader.readLine());
-            movieController.addMovie(id, name, rating, year, directorId);
-        } catch (IOException | ValidException | DuplicateException e) {
-            System.out.println(e.getMessage());
-            this.addMovie();
-        }
-    }
-
-    public void addActor() {
+    // Actor methods
+    private void addActor() {
         try {
             System.out.println("ID:");
             var id = Integer.parseInt(reader.readLine());
@@ -353,7 +147,284 @@ public class Console {
         }
     }
 
-    public void addPlaysIn() {
+    private void updateActor() {
+        try {
+            var id = Integer.parseInt(this.getField("ID:"));
+            var name = this.getField("Name:");
+            var age = Integer.parseInt(this.getField("Age:"));
+            var fame = Integer.parseInt(this.getField("Fame:"));
+            actorController.updateActor(id, name, age, fame);
+
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.updateActor();
+        }
+    }
+
+    private void deleteActor() {
+        try {
+            var id = Integer.parseInt(this.getField("ID:"));
+            actorController.deleteActor(id);
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.deleteActor();
+        }
+    }
+
+    private void filterActor() {
+        System.out.println("Here you can see the actors that have a fame in a specific interval");
+        try {
+            var low = Integer.parseInt(this.getField("Low value:"));
+            var high = Integer.parseInt(this.getField("High value:"));
+            CompletableFuture.supplyAsync(
+                    () -> actorController.getActorsWithFameBetween(low, high)
+            )
+                    .thenAcceptAsync(actors -> actors.forEach(System.out::println));
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            this.filterActor();
+        }
+
+    }
+
+    private void reportActors() {
+        try {
+            var fame = Integer.parseInt(this.getField("fame"));
+            CompletableFuture.supplyAsync(
+                    () -> actorController.getPercentageOfFamousActors(fame)
+            )
+                    .thenAcceptAsync(System.out::println);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void showActors() {
+        CompletableFuture.supplyAsync(
+                () -> actorController.getAllActors()
+        )
+                .thenAcceptAsync(actors -> actors.forEach(System.out::println));
+    }
+
+    // Movie methods
+    private void addMovie() {
+        try {
+            System.out.println("ID:");
+            var id = Integer.parseInt(reader.readLine());
+            System.out.println("Name:");
+            var name = reader.readLine();
+            System.out.println("Rating:");
+            var rating = Integer.parseInt(reader.readLine());
+            System.out.println("Year:");
+            var year = Integer.parseInt(reader.readLine());
+            System.out.println("Director Id:");
+            var directorId = Integer.parseInt(reader.readLine());
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            movieController.addMovie(id, name, rating, year, directorId);
+                            return "Movie added";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+        } catch (IOException | ValidException | DuplicateException e) {
+            System.out.println(e.getMessage());
+            this.addMovie();
+        }
+    }
+
+    private void updateMovie() {
+        try {
+            var id = Integer.parseInt(this.getField("ID:"));
+            var name = this.getField("Name:");
+            var rating = Integer.parseInt(this.getField("Rating:"));
+            var year = Integer.parseInt(this.getField("Year:"));
+            var directorID = Integer.parseInt(this.getField("Director ID:"));
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            movieController.addMovie(id, name, rating, year, directorID);
+                            return "Movie updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.updateMovie();
+        }
+    }
+
+    private void deleteMovie() {
+        try {
+            var id = Integer.parseInt(this.getField("ID:"));
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            movieController.deleteMovie(id);
+                            return "Movie deleted";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.deleteMovie();
+        }
+    }
+
+    private void filterMovie() {
+        System.out.println("Here you can see the movies that have a rating greater then the one you insert");
+        try {
+            var rating = Integer.parseInt(this.getField("Rating:"));
+            CompletableFuture.supplyAsync(
+                    () -> movieController.getMoviesWithRatingHigherThan(rating)
+            )
+                    .thenAcceptAsync(movies -> movies.forEach(System.out::println));
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            this.filterMovie();
+        }
+    }
+
+    private void reportMovies() {
+        try {
+            var decade = Integer.parseInt(this.getField("decade"));
+            CompletableFuture.supplyAsync(
+                    () -> movieController.getPercentageOfMoviesThisDecade(decade)
+            )
+                    .thenAcceptAsync(System.out::println);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void showMovies() {
+        CompletableFuture.supplyAsync(
+                () -> movieController.getAllMovies()
+        )
+                .thenAcceptAsync(System.out::println);
+    }
+
+    // Director methods
+    private void addDirector() {
+        try {
+            System.out.println("ID:");
+            var id = Integer.parseInt(reader.readLine());
+            System.out.println("Name");
+            var name = reader.readLine();
+            System.out.println("Age");
+            var age = Integer.parseInt(reader.readLine());
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            directorController.addDirector(id, name, age);
+                            return "Director added";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+        } catch (IOException | ValidException | DuplicateException e) {
+            System.out.println(e.getMessage());
+            this.addDirector();
+        }
+    }
+
+    private void updateDirector() {
+        try {
+            var id = Integer.parseInt(this.getField("ID:"));
+            var name = this.getField("Name:");
+            var age = Integer.parseInt(this.getField("Age:"));
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            directorController.updateDirector(id, name, age);
+                            return "Director updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.updateDirector();
+        }
+    }
+
+    private void deleteDirector() {
+        try {
+            var id = Integer.parseInt(this.getField("ID:"));
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            directorController.deleteDirector(id);
+                            return "Director added";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.deleteDirector();
+        }
+    }
+
+    private void filterDirector() {
+        System.out.println("Here you can see the directors younger then an inputted age");
+        try {
+            var age = Integer.parseInt(this.getField("Age:"));
+            CompletableFuture.supplyAsync(
+                    () -> directorController.getDirectorsWithAgeSmallerThen(age)
+            )
+                    .thenAcceptAsync(System.out::println);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            this.filterDirector();
+        }
+    }
+
+    private void reportDirectors() {
+        try {
+            var age = Integer.parseInt(this.getField("age"));
+            CompletableFuture.supplyAsync(
+                    () -> directorController.getPercentageOfYoungDirectors(age)
+            )
+                    .thenAcceptAsync(System.out::println);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void showDirectors() {
+        CompletableFuture.supplyAsync(
+                () -> directorController.getAllDirectors()
+        )
+                .thenAcceptAsync(System.out::println);
+
+    }
+
+    // Plays in methods
+    private void addPlaysIn() {
         try {
             System.out.println("Movie ID:");
             var movieId = Integer.parseInt(reader.readLine());
@@ -362,73 +433,99 @@ public class Console {
             System.out.println("Role: ");
             var role = reader.readLine();
 
-            playsInController.addPlaysIn(movieId, actorId, role);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            playsInController.addPlaysIn(movieId, actorId, role);
+                            return "Role added";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
         } catch (IOException | ValidException | DuplicateException e) {
             System.out.println(e.getMessage());
             this.addPlaysIn();
         }
     }
 
-    public void showMovies() {
+    private void updatePlaysIn() {
         try {
-            var result = movieController.getAllMovies().get();
-            System.out.println(result);
-        } catch (InterruptedException | ExecutionException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void showActors() {
-        CompletableFuture.supplyAsync(
-                () -> actorController.getAllActors()
-        )
-                .thenAcceptAsync(actors -> actors.forEach(System.out::println));
-    }
-
-    public void showPlaysIn() {
-        try {
-            var result = playsInController.getAllPlaysIn().get();
-            System.out.println(result);
-        } catch (InterruptedException | ExecutionException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void showDirectors() {
-        try {
-            directorController.getAllDirectors().thenApply(t -> {
-                        t.forEach(System.out::println);
-                        return null;
+            var movieID = Integer.parseInt(this.getField("Movie ID:"));
+            var actorID = Integer.parseInt(this.getField("Actor ID:"));
+            var role = this.getField("Role:");
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            playsInController.updatePlaysIn(movieID, actorID, role);
+                            return "Role updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
                     }
-            );
-        } catch (RuntimeException e) {
+            ).thenAcceptAsync(System.out::println);
+
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.updatePlaysIn();
+        }
+    }
+
+    private void deletePlaysIn() {
+        try {
+            var movieID = Integer.parseInt(this.getField("Movie ID:"));
+            var actorID = Integer.parseInt(this.getField("Actor ID:"));
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            playsInController.deletePlaysIn(movieID, actorID);
+                            return "Role deleted";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
+        } catch (IOException | InexistentEntity e) {
+            System.out.println(e.getMessage());
+            this.deletePlaysIn();
+        }
+    }
+
+    private void filterPlaysIn() {
+        System.out.println("Here you can see the relations of movies and actors based on the roles");
+        try {
+            var role = this.getField("Role:");
+            CompletableFuture.supplyAsync(
+                    () -> playsInController.getPlayInRelationAfterRole(role)
+            )
+                    .thenAcceptAsync(System.out::println);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            this.filterPlaysIn();
+        }
+    }
+
+    private void reportPlaysIn() {
+        try {
+            var role = this.getField("Role:");
+            CompletableFuture.supplyAsync(
+                    () -> playsInController.getPercentageOfRolesOfActors(role)
+            )
+                    .thenAcceptAsync(System.out::println);
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
-    private String getField(String field) throws IOException {
-        System.out.println(field);
-        return reader.readLine();
+    private void showPlaysIn() {
+        CompletableFuture.supplyAsync(
+                () -> playsInController.getAllPlaysIn()
+        )
+                .thenAcceptAsync(System.out::println);
     }
 
-
-    public void run() throws IOException {
-        while (true) {
-            System.out.println("help - for commands menu");
-            var command = reader.readLine();
-
-            if (command.equals("exit") || command.equals("quit"))
-                return;
-
-            else if (commands.containsKey(command))
-                commands.get(command).run();
-            else
-                System.out.println("No such command !");
-        }
-    }
-
-    public static String handleException(ProgramException e) {
-        return e.getMessage();
-    }
 }

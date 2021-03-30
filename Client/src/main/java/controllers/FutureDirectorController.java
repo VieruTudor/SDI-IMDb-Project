@@ -6,15 +6,15 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 public interface FutureDirectorController {
-    Future<Void> addDirector(int id, String name, int age);
+    void addDirector(int id, String name, int age);
 
-    Future<Void> deleteDirector(int id);
+    void deleteDirector(int id);
 
-    Future<Void> updateDirector(int id, String name, int age);
+    void updateDirector(int id, String name, int age);
 
-    CompletableFuture<Iterable<Director>> getAllDirectors();
+    Iterable<Director> getAllDirectors();
 
-    Future<Iterable<Director>> getDirectorsWithAgeSmallerThen(int margin);
+    Iterable<Director> getDirectorsWithAgeSmallerThen(int margin);
 
-    Future<Double> getPercentageOfYoungDirectors(int age);
+    Double getPercentageOfYoungDirectors(int age);
 }
