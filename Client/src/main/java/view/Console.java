@@ -315,7 +315,7 @@ public class Console {
         CompletableFuture.supplyAsync(
                 () -> movieController.getAllMovies()
         )
-                .thenAcceptAsync(System.out::println);
+                .thenAcceptAsync(movies -> movies.forEach(System.out::println));
     }
 
     // Director methods
@@ -419,7 +419,7 @@ public class Console {
         CompletableFuture.supplyAsync(
                 () -> directorController.getAllDirectors()
         )
-                .thenAcceptAsync(System.out::println);
+                .thenAcceptAsync(directors -> directors.forEach(System.out::println));
 
     }
 
