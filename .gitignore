@@ -17,7 +17,6 @@ node_modules
 *.iml
 *.ipr
 *.iws
-socket/.idea
 .idea
 build
 out
@@ -25,7 +24,7 @@ generated
 MANIFEST.MF
 
 #gradle
-socket/gradle
+gradle
 .gradle
 
 

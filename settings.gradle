@@ -1,0 +1,5 @@
+rootProject.name = 'lab5x-test'
+include 'Server'
+include 'Common'
+include 'Client'
+
