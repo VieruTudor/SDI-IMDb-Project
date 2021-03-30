@@ -525,7 +525,7 @@ public class Console {
         CompletableFuture.supplyAsync(
                 () -> playsInController.getAllPlaysIn()
         )
-                .thenAcceptAsync(System.out::println);
+                .thenAcceptAsync(playsIn -> playsIn.forEach(System.out::println));
     }
 
 }

@@ -61,6 +61,7 @@ public class PlaysInController implements IPlaysInController {
      */
     @Override
     public Iterable<PlaysIn> getAllPlaysIn() {
+        System.out.println(this.playsIn.length());
         return this.playsIn.findAll();
     }
 

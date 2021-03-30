@@ -1,8 +1,9 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Pair<F, S> {
+public class Pair<F, S> implements Serializable {
     private F first; //first member of pair
     private S second; //second member of pair
 
