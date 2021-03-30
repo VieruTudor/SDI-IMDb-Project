@@ -2,14 +2,10 @@ package controllers;
 
 import domain.Actor;
 import interfaces.IActorController;
-import networking.Message;
-import networking.TCPClient;
-import networking.Utils.NetworkUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ActorController implements FutureActorController {

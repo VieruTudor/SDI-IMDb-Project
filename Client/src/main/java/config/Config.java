@@ -4,16 +4,15 @@ import controllers.*;
 import interfaces.*;
 import networking.ServerInformation;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import view.ResponseBuffer;
 import view.Console;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Configuration
 public class Config {
+
     @Bean
     Console console() {
         return new Console();
@@ -48,10 +47,7 @@ public class Config {
         return new PlaysInController();
     }
 
-    @Bean
-    ResponseBuffer responseBuffer(){
-        return new ResponseBuffer();
-    }
+
 
     @Bean
     RmiProxyFactoryBean rmiActorProxyFactoryBean() {
