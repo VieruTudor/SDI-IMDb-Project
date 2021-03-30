@@ -4,10 +4,8 @@ import domain.PlaysIn;
 import interfaces.IPlaysInController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
+
 
 public class PlaysInController implements FuturePlaysInController {
     @Autowired
@@ -16,38 +14,34 @@ public class PlaysInController implements FuturePlaysInController {
     @Autowired
     private IPlaysInController playsInController;
 
+
     @Override
-    public Future<Void> addPlaysIn(int movieId, int actorId, String role) {
-        return null;
+    public void addPlaysIn(int movieId, int actorId, String role) {
+        playsInController.addPlaysIn(movieId, actorId, role);
     }
 
     @Override
-    public Future<Void> deletePlaysIn(int movieId, int actorId) {
-        return null;
+    public void deletePlaysIn(int movieId, int actorId) {
+        playsInController.deletePlaysIn(movieId, actorId);
     }
 
     @Override
-    public Future<Void> updatePlaysIn(int movieId, int actorId, String role) {
-        return null;
+    public void updatePlaysIn(int movieId, int actorId, String role) {
+        playsInController.updatePlaysIn(movieId, actorId, role);
     }
 
     @Override
-    public Future<Iterable<PlaysIn>> getAllPlaysIn() {
-        Callable<Iterable<PlaysIn>> callable = () ->
-        {
-            return playsInController.getAllPlaysIn();
-        };
-        return executorService.submit(callable);
+    public Iterable<PlaysIn> getAllPlaysIn() {
+        return playsInController.getAllPlaysIn();
     }
 
     @Override
-    public Future<Iterable<PlaysIn>> getPlayInRelationAfterRole(String role) {
-        return null;
+    public Iterable<PlaysIn> getPlayInRelationAfterRole(String role) {
+        return playsInController.getPlaysInRelationAfterRole(role);
     }
 
     @Override
-    public Future<Double> getPercentageOfRolesOfActors(String role) {
-        return null;
+    public Double getPercentageOfRolesOfActors(String role) {
+        return playsInController.getPercentageOfRolesOfActors(role);
     }
-
 }

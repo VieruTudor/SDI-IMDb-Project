@@ -2,45 +2,46 @@ package controllers;
 
 import domain.Director;
 
+import interfaces.IDirectorController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 public class DirectorController implements FutureDirectorController {
 
     @Autowired
     private ExecutorService executorService;
 
+    @Autowired
+    private IDirectorController directorController;
+
     @Override
-    public Future<Void> addDirector(int id, String name, int age) {
-        return null;
+    public void addDirector(int id, String name, int age) {
+        directorController.addDirector(id, name, age);
     }
 
     @Override
-    public Future<Void> deleteDirector(int id) {
-        return null;
+    public void deleteDirector(int id) {
+        directorController.deleteDirector(id);
     }
 
     @Override
-    public Future<Void> updateDirector(int id, String name, int age) {
-        return null;
+    public void updateDirector(int id, String name, int age) {
+        directorController.updateDirector(id, name, age);
     }
 
     @Override
-    public CompletableFuture<Iterable<Director>> getAllDirectors() {
-        return null;
+    public Iterable<Director> getAllDirectors() {
+        return directorController.getAllDirectors();
     }
 
     @Override
-    public Future<Iterable<Director>> getDirectorsWithAgeSmallerThen(int margin) {
-        return null;
+    public Iterable<Director> getDirectorsWithAgeSmallerThen(int margin) {
+        return directorController.getDirectorsWithAgeSmallerThen(margin);
     }
 
     @Override
-    public Future<Double> getPercentageOfYoungDirectors(int age) {
-        return null;
+    public Double getPercentageOfYoungDirectors(int age) {
+        return directorController.getPercentageOfYoungDirectors(age);
     }
-
-
 }

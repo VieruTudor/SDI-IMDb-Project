@@ -1,46 +1,47 @@
 package controllers;
 
 import domain.Movie;
+import interfaces.IMovieController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
+
 
 public class MovieController implements FutureMovieController {
 
     @Autowired
     private ExecutorService executorService;
 
+    @Autowired
+    private IMovieController movieController;
 
     @Override
-    public Future<Void> addMovie(int id, String name, int rating, int year, int directorId) {
-        return null;
+    public void addMovie(int id, String name, int rating, int year, int directorId) {
+        movieController.addMovie(id, name, rating, year, directorId);
     }
 
     @Override
-    public Future<Void> deleteMovie(int id) {
-        return null;
+    public void deleteMovie(int id) {
+        movieController.deleteMovie(id);
     }
 
     @Override
-    public Future<Void> updateMovie(int id, String name, int rating, int year, int directorId) {
-        return null;
+    public void updateMovie(int id, String name, int rating, int year, int directorId) {
+        movieController.updateMovie(id, name, rating, year, directorId);
     }
 
     @Override
-    public Future<Iterable<Movie>> getAllMovies() {
-        return null;
+    public Iterable<Movie> getAllMovies() {
+        return movieController.getAllMovies();
     }
 
     @Override
-    public Future<Iterable<Movie>> getMoviesWithRatingHigherThan(int margin) {
-        return null;
+    public Iterable<Movie> getMoviesWithRatingHigherThan(int margin) {
+        return movieController.getMoviesWithRatingHigherThan(margin);
     }
 
     @Override
-    public Future<Double> getPercentageOfMoviesThisDecade(int decade) {
-        return null;
+    public Double getPercentageOfMoviesThisDecade(int decade) {
+        return movieController.getPercentageOfMoviesThisDecade(decade);
     }
 }
