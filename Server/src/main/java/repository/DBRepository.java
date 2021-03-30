@@ -1,103 +1,75 @@
 package repository;
 
+import config.JdbcConfig;
 import database.Database;
+import database.adapters.TableAdapter;
 import database.serializers.IDBTranslator;
 import domain.BaseEntity;
 import exception.InexistentEntity;
 import exception.ValidException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 public class DBRepository<ID, T extends BaseEntity<ID>> implements IRepository<ID, T> {
 
-    private final IDBTranslator<T> serializer;
 
-    public DBRepository(IDBTranslator<T> serializer) {
-        this.serializer = serializer;
+    private TableAdapter<ID, T> tableAdapter;
+
+    public DBRepository(TableAdapter<ID, T> tableAdapter){
+        this.tableAdapter = tableAdapter;
     }
-
-    /**
-     * function to collect entities from db given sql command
-     *
-     * @param sqlString - string , sql command
-     */
-    private List<T> collect(String sqlString) {
-        List<T> all = new ArrayList<>();
-
-        try (var connection = Database.newConnection();
-             var ps = connection.prepareStatement(sqlString);
-             var rs = ps.executeQuery()) {
-            while (rs.next()) {
-                var entity = serializer.deserializer(rs);
-                all.add(entity);
-            }
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-        return all;
-    }
-
-    /**
-     * function that execute the sqlCommand on the db
-     *
-     * @param sqlString - string , sql command
-     */
-    public void executeSqlCommand(String sqlString) {
-        try (var connection = Database.newConnection();
-             var ps = connection.prepareStatement(sqlString)) {
-            ps.executeUpdate();
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
     @Override
     public Optional<T> findOne(ID id) {
-        String sqlString = "Select * from " + serializer.getTable() + " " + serializer.searchById() + id;
-        var all = collect(sqlString);
-        all.stream().findAny()
-                .orElseThrow(()->{ throw new InexistentEntity("No entity with matching id"); });
-        return Optional.ofNullable(all.get(0));
+        Objects.requireNonNull(id, "id must not be null");
+        return tableAdapter.read(id);
     }
 
     @Override
     public Iterable<T> findAll() {
-        String sqlString = "Select * from " + serializer.getTable();
-
-        return collect(sqlString);
+        return tableAdapter.readAll();
     }
 
     @Override
     public Optional<T> save(T entity) throws ValidException {
-        String sqlString = "insert into " + this.serializer.getTable() +
-                this.serializer.getFields() + " values " + this.serializer.serializer(entity);
-        this.executeSqlCommand(sqlString);
-        return Optional.ofNullable(entity);
+        Objects.requireNonNull(entity, "Entity can't be null");
+        Optional<T> readEntity = tableAdapter.read(entity.getId());
+        if(readEntity.isEmpty()){
+            tableAdapter.insert(entity);
+        }
+        return readEntity;
     }
 
     @Override
     public Optional<T> delete(ID id) {
-        var found = this.findOne(id);
-        String sqlString = "Delete from " + this.serializer.getTable() + " " + this.serializer.searchById() + id;
-        this.executeSqlCommand(sqlString);
-        return found;
+        Objects.requireNonNull(id, "Id can't be null");
+        return tableAdapter.read(id).map(
+                readEntity -> {
+                    tableAdapter.delete(id);
+                    return readEntity;
+                }
+        );
     }
 
     @Override
     public Optional<T> update(T entity) throws ValidException {
-        // try catch here
-        var found = this.findOne(entity.getId());
-        this.delete(entity.getId());
-        this.save(entity);
-        return Optional.of(entity);
+        Objects.requireNonNull(entity, "Entity can't be null");
+        return tableAdapter.read(entity.getId()).map(
+                readEntity -> {
+                    tableAdapter.update(entity);
+                    return entity;
+                }
+        );
     }
 
     @Override
     public int length() {
-        return (int) StreamSupport.stream(this.findAll().spliterator(), false).count();
+        return tableAdapter.readAll().size();
     }
 }

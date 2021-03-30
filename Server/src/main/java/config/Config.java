@@ -1,5 +1,9 @@
 package config;
 
+import database.adapters.ActorTableAdapter;
+import database.adapters.DirectorTableAdapter;
+import database.adapters.MovieTableAdapter;
+import database.adapters.PlaysInTableAdapter;
 import interfaces.IActorController;
 import interfaces.IDirectorController;
 import interfaces.IMovieController;
@@ -26,40 +30,39 @@ import repository.IRepository;
 public class Config {
 
 
-    //DB serializers
+    //table adapters
     @Bean
-    ActorDBTranslator actorDBTranslator(){
-        return new ActorDBTranslator();
+    ActorTableAdapter actorTableAdapter(){
+        return new ActorTableAdapter();
     }
     @Bean
-    DirectorDBTranslator directorDBTranslator(){
-        return new DirectorDBTranslator();
+    DirectorTableAdapter directorTableAdapter(){
+        return new DirectorTableAdapter();
     }
     @Bean
-    MovieDBTranslator movieDBTranslator(){
-        return new MovieDBTranslator();
+    MovieTableAdapter movieTableAdapter(){
+        return new MovieTableAdapter();
     }
     @Bean
-    PlayInDBTranslator playInDBTranslator(){
-        return new PlayInDBTranslator();
+    PlaysInTableAdapter playsInTableAdapter(){
+        return new PlaysInTableAdapter();
     }
-
     //repositories
     @Bean
-    IRepository<Integer, Actor> actorRepository(ActorDBTranslator actorDBTranslator){
-        return new DBRepository<Integer, Actor>(actorDBTranslator);
+    IRepository<Integer, Actor> actorRepository(ActorTableAdapter actorTableAdapter){
+        return new DBRepository<Integer, Actor>(actorTableAdapter);
     }
     @Bean
-    IRepository<Integer, Director> directorRepository(DirectorDBTranslator directorDBTranslator){
-        return new DBRepository<>(directorDBTranslator);
+    IRepository<Integer, Director> directorRepository(DirectorTableAdapter directorTableAdapter){
+        return new DBRepository<>(directorTableAdapter);
     }
     @Bean
-    IRepository<Integer, Movie> movieRepository(MovieDBTranslator movieDBTranslator){
-        return new DBRepository<>(movieDBTranslator);
+    IRepository<Integer, Movie> movieRepository(MovieTableAdapter movieTableAdapter){
+        return new DBRepository<>(movieTableAdapter);
     }
     @Bean
-    IRepository<Pair<Integer, Integer>, PlaysIn> playsInRepository(PlayInDBTranslator playInDBTranslator){
-        return new DBRepository<>(playInDBTranslator);
+    IRepository<Pair<Integer, Integer>, PlaysIn> playsInRepository(PlaysInTableAdapter playsInTableAdapter){
+        return new DBRepository<>(playsInTableAdapter);
     }
 
     //controllers
