@@ -19,7 +19,7 @@ public class PlaysInTableAdapter implements TableAdapter<Pair<Integer, Integer>,
     {
         PlaysIn playsIn = new PlaysIn(
                 resultSet.getInt("movieid"),
-                resultSet.getInt("directorid"),
+                resultSet.getInt("actorid"),
                 resultSet.getString("role")
         );
         return playsIn;
@@ -62,7 +62,7 @@ public class PlaysInTableAdapter implements TableAdapter<Pair<Integer, Integer>,
 
     @Override
     public void delete(Pair<Integer, Integer> id) {
-        String query = "DELETE FROM playsin WHERE id = ?";
+        String query = "DELETE FROM playin WHERE id = ?";
         jdbcOperations.update(query, id);
     }
 }

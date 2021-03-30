@@ -47,10 +47,11 @@ public class Config {
     PlaysInTableAdapter playsInTableAdapter(){
         return new PlaysInTableAdapter();
     }
+
     //repositories
     @Bean
     IRepository<Integer, Actor> actorRepository(ActorTableAdapter actorTableAdapter){
-        return new DBRepository<Integer, Actor>(actorTableAdapter);
+        return new DBRepository<>(actorTableAdapter);
     }
     @Bean
     IRepository<Integer, Director> directorRepository(DirectorTableAdapter directorTableAdapter){

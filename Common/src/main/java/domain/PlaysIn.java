@@ -21,7 +21,7 @@ public class PlaysIn extends BaseEntity<Pair<Integer, Integer>> implements Seria
         this.movieID = movieID;
         this.actorID = actorID;
         this.role = role;
-        this.setId(new Pair<>(actorID, movieID));
+        this.setId(new Pair<>(movieID, actorID));
     }
 
 
