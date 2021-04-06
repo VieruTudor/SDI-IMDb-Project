@@ -26,9 +26,9 @@ public class DirectorService implements IDirectorService {
     /**
      * Creates a Director object and adds it into its repository
      *
-     * @param id the id of the Director
+     * @param id   the id of the Director
      * @param name name of the Director
-     * @param age age of the Director
+     * @param age  age of the Director
      */
     @Override
     @Transactional
@@ -61,21 +61,21 @@ public class DirectorService implements IDirectorService {
     /**
      * Updates a Director based on a given ID
      *
-     * @param id the given ID
+     * @param id   the given ID
      * @param name the new Director name
-     * @param age the new Director age
+     * @param age  the new Director age
      */
     @Override
     @Transactional
     public void updateDirector(int id, String name, int age) {
         log.trace("update Director - method started");
-        Validator.validateDirector(name,age);
+        Validator.validateDirector(name, age);
         Optional.of(this.directorRepo.findById(id)).get().orElseThrow(
                 () -> {
                     throw new InexistentEntity("Movie not present !");
                 });
         this.directorRepo.deleteById(id);
-        Director new_director =new Director(name,age);
+        Director new_director = new Director(name, age);
         this.directorRepo.save(new_director);
         log.trace("update Director - ✔ done");
     }

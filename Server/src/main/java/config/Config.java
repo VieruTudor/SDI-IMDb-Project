@@ -1,5 +1,6 @@
 package config;
 
+import domain.serializers.ICSVSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,39 +18,46 @@ import interfaces.IPlaysInService;
 @ComponentScan({"repository", "services", "interfaces"})
 public class Config {
     @Bean
-    RmiServiceExporter actorExporter(ActorService actorController){
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        rmiServiceExporter.setServiceName("ActorService");
-        rmiServiceExporter.setServiceInterface(IActorService.class);
-        rmiServiceExporter.setService(actorController);
-        rmiServiceExporter.setRegistryPort(1234);
-        return rmiServiceExporter;
+    RmiServiceExporter actorExporter(IActorService actorService) {
+        Class<IActorService> serviceInterface = IActorService.class;
+        RmiServiceExporter exporter = new RmiServiceExporter();
+        exporter.setServiceInterface(serviceInterface);
+        exporter.setService(actorService);
+        exporter.setServiceName(serviceInterface.getSimpleName());
+        exporter.setRegistryPort(1234);
+        return exporter;
     }
+
     @Bean
-    RmiServiceExporter directorExporter(DirectorService directorService){
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        rmiServiceExporter.setServiceName("DirectorService");
-        rmiServiceExporter.setServiceInterface(IDirectorService.class);
-        rmiServiceExporter.setService(directorService);
-        rmiServiceExporter.setRegistryPort(1234);
-        return rmiServiceExporter;
+    RmiServiceExporter directorExporter(IDirectorService directorService) {
+        Class<IDirectorService> serviceInterface = IDirectorService.class;
+        RmiServiceExporter exporter = new RmiServiceExporter();
+        exporter.setServiceInterface(serviceInterface);
+        exporter.setService(directorService);
+        exporter.setServiceName(serviceInterface.getSimpleName());
+        exporter.setRegistryPort(1234);
+        return exporter;
     }
+
     @Bean
-    RmiServiceExporter movieExporter(MovieService movieService){
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        rmiServiceExporter.setServiceName("MovieService");
-        rmiServiceExporter.setServiceInterface(IMovieService.class);
-        rmiServiceExporter.setService(movieService);
-        rmiServiceExporter.setRegistryPort(1234);
-        return rmiServiceExporter;
+    RmiServiceExporter movieExporter(IMovieService movieService) {
+        Class<IMovieService> serviceInterface = IMovieService.class;
+        RmiServiceExporter exporter = new RmiServiceExporter();
+        exporter.setServiceInterface(serviceInterface);
+        exporter.setService(movieService);
+        exporter.setServiceName(serviceInterface.getSimpleName());
+        exporter.setRegistryPort(1234);
+        return exporter;
     }
+
     @Bean
-    RmiServiceExporter playsInExporter(PlaysInService playsInService){
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        rmiServiceExporter.setServiceName("PlaysInService");
-        rmiServiceExporter.setServiceInterface(IPlaysInService.class);
-        rmiServiceExporter.setService(playsInService);
-        rmiServiceExporter.setRegistryPort(1234);
-        return rmiServiceExporter;
+    RmiServiceExporter playsInExporter(IPlaysInService playsInService) {
+        Class<IPlaysInService> serviceInterface = IPlaysInService.class;
+        RmiServiceExporter exporter = new RmiServiceExporter();
+        exporter.setServiceInterface(serviceInterface);
+        exporter.setService(playsInService);
+        exporter.setServiceName(serviceInterface.getSimpleName());
+        exporter.setRegistryPort(1234);
+        return exporter;
     }
 }

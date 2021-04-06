@@ -1,12 +1,15 @@
 package services;
+
 import org.springframework.stereotype.Service;
 import interfaces.IActorService;
 import repository.IActorRepo;
 import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import exception.*;
+
 import java.util.Optional;
 import java.util.stream.*;
+
 import validators.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import javax.transaction.Transactional;
 
 @Service
-public class ActorService  implements IActorService {
+public class ActorService implements IActorService {
 
     @Autowired
     private IActorRepo repo;
@@ -32,11 +35,10 @@ public class ActorService  implements IActorService {
      */
     @Override
     @Transactional
-    public void addActor(int id, String name, int age, int fame)
-    {
+    public void addActor(int id, String name, int age, int fame) {
         log.trace("add actor - method started");
-        Validator.validateActor(name,age,fame);
-        Actor newActor= new Actor(name,age,fame);
+        Validator.validateActor(name, age, fame);
+        Actor newActor = new Actor(name, age, fame);
 
         newActor.setId(id);
         this.repo.save(newActor);
@@ -50,8 +52,7 @@ public class ActorService  implements IActorService {
      */
     @Override
     @Transactional
-    public void deleteActor(int id)
-    {
+    public void deleteActor(int id) {
         log.trace("delete actor - method started");
         Optional.of(this.repo.findById(id)).get().orElseThrow(
                 () -> {
@@ -71,16 +72,15 @@ public class ActorService  implements IActorService {
      */
     @Override
     @Transactional
-    public void updateActor(int id, String name, int age, int fame)
-    {
+    public void updateActor(int id, String name, int age, int fame) {
         log.trace("update actor - method started");
-        Validator.validateActor(name,age,fame);
+        Validator.validateActor(name, age, fame);
         Optional.of(this.repo.findById(id)).get().orElseThrow(
                 () -> {
                     throw new InexistentEntity("Movie not present !");
                 });
         this.repo.deleteById(id);
-        Actor newActor=new Actor(name,age,fame);
+        Actor newActor = new Actor(name, age, fame);
         this.repo.save(newActor);
         log.trace("update actor - done");
 
@@ -93,8 +93,7 @@ public class ActorService  implements IActorService {
      * @return Iterable containing all actors in the repository.
      */
     @Override
-    public Iterable<Actor> getAllActors()
-    {
+    public Iterable<Actor> getAllActors() {
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -111,9 +110,8 @@ public class ActorService  implements IActorService {
      * @return Set containing the collection resulted
      */
     @Override
-    public Iterable<Actor> getActorsWithFameBetween(int lower, int upper)
-    {
-        var actors=this.repo.findAll().stream().filter(m -> m.getFame() >= lower && m.getFame() <= upper).collect(Collectors.toSet());
+    public Iterable<Actor> getActorsWithFameBetween(int lower, int upper) {
+        var actors = this.repo.findAll().stream().filter(m -> m.getFame() >= lower && m.getFame() <= upper).collect(Collectors.toSet());
         return actors;
     }
 
@@ -123,12 +121,11 @@ public class ActorService  implements IActorService {
      * @return Long value representing the requested percentage
      */
     @Override
-    public Double getPercentageOfFamousActors(int fame)
-    {
+    public Double getPercentageOfFamousActors(int fame) {
         var count = this.repo.findAll().stream().filter(a -> a.getFame() >= fame)
                 .count();
-        var total=this.repo.count();
-        return (double)((count * 100) / total);
+        var total = this.repo.count();
+        return (double) ((count * 100) / total);
 
     }
 

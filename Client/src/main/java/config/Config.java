@@ -52,7 +52,7 @@ public class Config {
     RmiProxyFactoryBean rmiActorProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
         rmiProxyFactoryBean.setServiceInterface(IActorService.class);
-        String url = String.format("rmi://localhost:%d/ActorService", 1234);
+        String url = String.format("rmi://localhost:%d/IActorService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
@@ -61,7 +61,7 @@ public class Config {
     RmiProxyFactoryBean rmiMovieProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
         rmiProxyFactoryBean.setServiceInterface(IMovieService.class);
-        String url = String.format("rmi://localhost:%d/MovieService", 1234);
+        String url = String.format("rmi://localhost:%d/IMovieService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
@@ -70,7 +70,7 @@ public class Config {
     RmiProxyFactoryBean rmiDirectorProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
         rmiProxyFactoryBean.setServiceInterface(IDirectorService.class);
-        String url = String.format("rmi://localhost:%d/DirectorService", 1234);
+        String url = String.format("rmi://localhost:%d/IDirectorService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
@@ -79,7 +79,7 @@ public class Config {
     RmiProxyFactoryBean rmiPlaysInProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
         rmiProxyFactoryBean.setServiceInterface(IPlaysInService.class);
-        String url = String.format("rmi://localhost:%d/PlaysInService", 1234);
+        String url = String.format("rmi://localhost:%d/IPlaysInService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
