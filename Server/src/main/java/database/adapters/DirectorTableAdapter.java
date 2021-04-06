@@ -1,6 +1,5 @@
 package database.adapters;
 
-import domain.Actor;
 import domain.Director;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;

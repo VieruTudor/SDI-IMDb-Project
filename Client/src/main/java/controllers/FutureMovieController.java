@@ -2,8 +2,6 @@ package controllers;
 
 import domain.Movie;
 
-import java.util.concurrent.Future;
-
 public interface FutureMovieController {
     void addMovie(int id, String name, int rating, int year, int directorId);
 

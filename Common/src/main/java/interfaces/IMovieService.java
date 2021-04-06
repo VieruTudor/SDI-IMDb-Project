@@ -2,7 +2,7 @@ package interfaces;
 
 import domain.Movie;
 
-public interface IMovieController {
+public interface IMovieService {
     void addMovie(int id, String name, int rating, int year, int directorId);
 
     void deleteMovie(int id);

@@ -2,7 +2,6 @@ package config;
 
 import controllers.*;
 import interfaces.*;
-import networking.ServerInformation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
@@ -52,8 +51,8 @@ public class Config {
     @Bean
     RmiProxyFactoryBean rmiActorProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceInterface(IActorController.class);
-        String url = String.format("rmi://localhost:%d/ActorController", ServerInformation.PORT);
+        rmiProxyFactoryBean.setServiceInterface(IActorService.class);
+        String url = String.format("rmi://localhost:%d/ActorService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
@@ -61,8 +60,8 @@ public class Config {
     @Bean
     RmiProxyFactoryBean rmiMovieProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceInterface(IMovieController.class);
-        String url = String.format("rmi://localhost:%d/MovieController", ServerInformation.PORT);
+        rmiProxyFactoryBean.setServiceInterface(IMovieService.class);
+        String url = String.format("rmi://localhost:%d/MovieService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
@@ -70,8 +69,8 @@ public class Config {
     @Bean
     RmiProxyFactoryBean rmiDirectorProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceInterface(IDirectorController.class);
-        String url = String.format("rmi://localhost:%d/DirectorController", ServerInformation.PORT);
+        rmiProxyFactoryBean.setServiceInterface(IDirectorService.class);
+        String url = String.format("rmi://localhost:%d/DirectorService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }
@@ -79,8 +78,8 @@ public class Config {
     @Bean
     RmiProxyFactoryBean rmiPlaysInProxyFactoryBean() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceInterface(IPlaysInController.class);
-        String url = String.format("rmi://localhost:%d/PlaysInController", ServerInformation.PORT);
+        rmiProxyFactoryBean.setServiceInterface(IPlaysInService.class);
+        String url = String.format("rmi://localhost:%d/PlaysInService", 1234);
         rmiProxyFactoryBean.setServiceUrl(url);
         return rmiProxyFactoryBean;
     }

@@ -2,9 +2,6 @@ package controllers;
 
 import domain.Actor;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
-
 public interface FutureActorController {
     void addActor(int id, String name, int age, int fame);
 

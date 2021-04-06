@@ -2,7 +2,7 @@ package interfaces;
 
 import domain.Actor;
 
-public interface IActorController {
+public interface IActorService {
     void addActor(int id, String name, int age, int fame);
 
     void deleteActor(int id);

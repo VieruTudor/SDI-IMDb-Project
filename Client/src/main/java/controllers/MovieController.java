@@ -1,19 +1,18 @@
 package controllers;
 
 import domain.Movie;
-import interfaces.IMovieController;
+import interfaces.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutorService;
 
-
+@Service
 public class MovieController implements FutureMovieController {
 
-    @Autowired
-    private ExecutorService executorService;
 
     @Autowired
-    private IMovieController movieController;
+    private IMovieService movieController;
 
     @Override
     public void addMovie(int id, String name, int rating, int year, int directorId) {

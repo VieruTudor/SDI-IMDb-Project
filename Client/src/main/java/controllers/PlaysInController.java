@@ -1,18 +1,17 @@
 package controllers;
 
 import domain.PlaysIn;
-import interfaces.IPlaysInController;
+import interfaces.IPlaysInService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutorService;
 
-
+@Service
 public class PlaysInController implements FuturePlaysInController {
-    @Autowired
-    private ExecutorService executorService;
 
     @Autowired
-    private IPlaysInController playsInController;
+    private IPlaysInService playsInController;
 
 
     @Override

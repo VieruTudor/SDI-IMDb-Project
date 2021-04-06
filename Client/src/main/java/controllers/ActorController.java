@@ -1,19 +1,17 @@
 package controllers;
 
 import domain.Actor;
-import interfaces.IActorController;
+import interfaces.IActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.*;
 
 @Service
 public class ActorController implements FutureActorController {
-    @Autowired
-    private ExecutorService executorService;
+
 
     @Autowired
-    private IActorController actorController;
+    private IActorService actorController;
 
     @Override
     public void addActor(int id, String name, int age, int fame) {

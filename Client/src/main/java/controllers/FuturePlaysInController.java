@@ -2,8 +2,6 @@ package controllers;
 
 import domain.PlaysIn;
 
-import java.util.concurrent.Future;
-
 public interface FuturePlaysInController {
     void addPlaysIn(int movieId, int actorId, String role);
 

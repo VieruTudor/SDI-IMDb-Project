@@ -2,18 +2,18 @@ package controllers;
 
 import domain.Director;
 
-import interfaces.IDirectorController;
+import interfaces.IDirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.*;
 
+@Service
 public class DirectorController implements FutureDirectorController {
 
-    @Autowired
-    private ExecutorService executorService;
 
     @Autowired
-    private IDirectorController directorController;
+    private IDirectorService directorController;
 
     @Override
     public void addDirector(int id, String name, int age) {

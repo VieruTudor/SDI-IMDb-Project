@@ -1,17 +1,26 @@
-package controllers;
-
-import interfaces.IMovieController;
-import repository.*;
-import domain.*;
+package services;
+import org.springframework.stereotype.Service;
+import interfaces.IMovieService;
+import repository.IMovieRepo;
 import java.util.stream.*;
+import domain.Movie;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.*;
+import exception.*;
+import validators.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import validators.Validator;
-public class MovieController implements IMovieController {
-    private IRepository<Integer,Movie> movies;
-    public MovieController(IRepository<Integer,Movie>movies)
-    {
-        this.movies=movies;
-    }
+import javax.transaction.Transactional;
+
+@Service
+public class MovieService implements IMovieService {
+
+    @Autowired
+    private IMovieRepo repo;
+
+    public static final Logger log = LoggerFactory.getLogger(MovieService.class);
+
     /**
      * Creates a movie object from the received parameters and adds it to the repository.
      *
@@ -21,23 +30,35 @@ public class MovieController implements IMovieController {
      * @param year   given Year
      */
     @Override
+    @Transactional
     public void addMovie(int id, String name, int rating, int year, int directorId)
     {
+        log.trace("add movie - method started");
         Validator.validateMovie(name,rating,year,directorId);
         Movie newMovie=new Movie(name,rating,year,directorId);
         newMovie.setId(id);
-        this.movies.save(newMovie);
+        this.repo.save(newMovie);
+        log.trace("add movie - done");
     }
+
     /**
      * Deletes a movie based on its id
      *
      * @param id given Id for the movie to be deleted
      */
     @Override
+    @Transactional
     public void deleteMovie(int id)
     {
-        this.movies.delete(id);
+        log.trace("delete movie - method started");
+        Optional.of(this.repo.findById(id)).get().orElseThrow(
+                () -> {
+                    throw new InexistentEntity("Movie not present !");
+                });
+        this.repo.deleteById(id);
+        log.trace("delete movie - done");
     }
+
     /**
      * Updates a Movie based on a given ID
      *
@@ -48,13 +69,24 @@ public class MovieController implements IMovieController {
      * @param directorId the new directorID (has to be validated)
      */
     @Override
+    @Transactional
     public void updateMovie(int id, String name, int rating, int year, int directorId)
     {
+        log.trace("update movie - method started");
         Validator.validateMovie(name,rating,year,directorId);
-        Movie movie=new Movie(name,rating,year,directorId);
-        movie.setId(id);
-        this.movies.update(movie);
+        Optional.of(this.repo.findById(id)).get().orElseThrow(
+                () -> {
+                    throw new InexistentEntity("Movie not present !");
+                });
+
+        this.repo.deleteById(id);
+        Movie updated=new Movie(name,rating,year,directorId);
+        updated.setId(id);
+        this.repo.save(updated);
+        log.trace("update movie - done");
+
     }
+
     /**
      * Gets all the movies in the repository.
      *
@@ -63,8 +95,9 @@ public class MovieController implements IMovieController {
     @Override
     public Iterable<Movie> getAllMovies()
     {
-        return this.movies.findAll();
+        return this.repo.findAll();
     }
+
     /**
      * Get all movies with rating higher then given margin
      *
@@ -74,21 +107,22 @@ public class MovieController implements IMovieController {
     @Override
     public Iterable<Movie> getMoviesWithRatingHigherThan(int margin)
     {
-        return StreamSupport.stream(this.getAllMovies().spliterator(), false)
-                .collect(Collectors.toSet()).stream()
+        return this.repo.findAll().stream()
                 .filter(m -> m.getRating() >= margin).collect(Collectors.toSet());
     }
+
     /**
      * Get percentage of movies that appeared this decade
      *
      * @return Long value representing the requested percentage
      */
-    public Double getPercentageOfMoviesThisDecade(int decade){
-        double thisDecadeMovies = StreamSupport.stream(this.getAllMovies().spliterator(), false)
-                .collect(Collectors.toSet()).stream()
-                .filter(movie -> movie.getYear() >= decade)
+    @Override
+    public Double getPercentageOfMoviesThisDecade(int decade)
+    {
+        long thisDecadeMovies=this.repo.findAll().stream()
+                .filter(movie -> movie.getYear() >= 2010)
                 .count();
-        double allMovies = StreamSupport.stream(this.getAllMovies().spliterator(), false).count();
-        return (thisDecadeMovies * 100) / allMovies;
+        long allMovies=this.repo.count();
+        return (double)((thisDecadeMovies*100)/allMovies);
     }
 }

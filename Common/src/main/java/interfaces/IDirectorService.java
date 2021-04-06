@@ -2,7 +2,7 @@ package interfaces;
 
 import domain.Director;
 
-public interface IDirectorController {
+public interface IDirectorService {
     void addDirector(int id, String name, int age);
 
     void deleteDirector(int id);

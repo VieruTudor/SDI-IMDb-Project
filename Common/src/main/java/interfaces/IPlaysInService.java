@@ -2,7 +2,7 @@ package interfaces;
 
 import domain.PlaysIn;
 
-public interface IPlaysInController {
+public interface IPlaysInService {
     void addPlaysIn(int movieId, int actorId, String role);
 
     void deletePlaysIn(int movieId, int actorId);

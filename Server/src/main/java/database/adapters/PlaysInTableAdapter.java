@@ -1,14 +1,11 @@
 package database.adapters;
 
-import database.Database;
-import domain.Movie;
 import domain.Pair;
 import domain.PlaysIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,7 +1,7 @@
 package domain;
 
 import javax.persistence.Entity;
-import java.util.*;
+import java.util.Objects;
 
 @Entity
 public class PlaysIn extends BaseEntity<Pair<Integer, Integer>>{
