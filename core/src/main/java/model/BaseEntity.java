@@ -17,4 +17,8 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
     @Id
     @GeneratedValue
     protected ID id;
+
+    public abstract String toCSV();
+
+    public abstract String toDBValues();
 }
