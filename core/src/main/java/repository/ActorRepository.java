@@ -12,4 +12,6 @@ public interface ActorRepository extends IRepository<Actor, Integer>{
       Iterable<Actor> findActorByFameBetween(int lower, int upper);
 
       int countActorByFameGreaterThanEqual(int threshold);
+
+
 }
