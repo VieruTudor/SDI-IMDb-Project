@@ -14,4 +14,6 @@ public interface IMovieService {
     Iterable<Movie> getAllMovies();
 
     Iterable<Movie> getMoviesWithRatingGreater(int lower);
+
+    Double getPercentageOfMoviesThisDecade(int decade);
 }
