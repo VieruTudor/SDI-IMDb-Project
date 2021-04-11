@@ -2,7 +2,9 @@ package converter;
 
 import dto.DirectorDto;
 import model.Director;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DirectorConverter extends BaseConverter<Director, DirectorDto> {
     @Override
     public Director convertDtoToModel(DirectorDto dto) {

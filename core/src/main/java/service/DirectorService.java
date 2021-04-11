@@ -1,7 +1,9 @@
 package service;
 
 import model.Director;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DirectorService implements IDirectorService{
     @Override
     public Director addDirector(Director director) {

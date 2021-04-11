@@ -8,11 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.DirectorService;
+import service.IDirectorService;
 
 @RestController
 public class DirectorController {
     @Autowired
-    private DirectorService directorService;
+    private IDirectorService directorService;
     @Autowired
     private DirectorConverter converter;
 

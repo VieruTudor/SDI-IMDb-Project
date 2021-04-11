@@ -16,19 +16,19 @@ public class MovieController {
     @Autowired
     private MovieConverter converter;
 
-    @RequestMapping(value="/movie")
+    @RequestMapping(value="/movies")
     public MoviesDto getAllMovies(){
         return new MoviesDto(converter.convertModelsToDtos(movieService.getAllMovies()));
     }
 
-    @RequestMapping(value= "/movie", method = RequestMethod.POST)
+    @RequestMapping(value= "/movies", method = RequestMethod.POST)
     MovieDto addMovie(@RequestBody MovieDto dto){
         var movie = converter.convertDtoToModel(dto);
         var result = movieService.addMovie(movie);
         return converter.convertModelToDto(result);
     }
 
-    @RequestMapping(value = "/movie/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/movies/{id}", method = RequestMethod.PUT)
     MovieDto updateMovie(@PathVariable int id, @RequestBody MovieDto dto){
         if(movieService.getById(id) == null){
             return null;
@@ -37,7 +37,7 @@ public class MovieController {
         var result = movieService.updateMovie(movie);
         return converter.convertModelToDto(result);
     }
-    @RequestMapping(value = "/movie/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/movies/{id}", method = RequestMethod.DELETE)
     ResponseEntity<?> deleteMovie(@PathVariable int id) {
         movieService.deleteMovie(id);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -90,6 +90,8 @@ public class ClientConsole {
 
 
     public void run() throws IOException {
+
+        System.out.println("sarpe");
         while (true) {
             System.out.println("help - for commands menu");
             var command = reader.readLine();
@@ -141,6 +143,7 @@ public class ClientConsole {
             var age = Integer.parseInt(this.getField("Age:"));
             var fame = Integer.parseInt(this.getField("Fame:"));
             var newActor = new ActorDto(name, age, fame);
+
             restTemplate.put(actorUrl + "/{id}", newActor, id);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -151,7 +154,9 @@ public class ClientConsole {
     private void deleteActor() {
         try {
             var id = Integer.parseInt(this.getField("ID:"));
-            restTemplate.delete(actorUrl + "/{id}", id);
+            Map<String, Integer>params = new HashMap<>();
+            params.put("id", id);
+            restTemplate.delete(actorUrl + "/{id}", params);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.deleteActor();

@@ -2,7 +2,9 @@ package converter;
 
 import dto.MovieDto;
 import model.Movie;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MovieConverter extends BaseConverter<Movie, MovieDto> {
     @Override
     public Movie convertDtoToModel(MovieDto dto) {

@@ -6,6 +6,8 @@ import com.zaxxer.hikari.HikariDataSource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+
+import org.postgresql.Driver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +42,7 @@ public class JPAConfig {
         config.setJdbcUrl(this.jdbcUrl);
         config.setUsername(this.username);
         config.setPassword(this.password);
+        config.setDriverClassName(Driver.class.getName());
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
@@ -54,7 +57,7 @@ public class JPAConfig {
         vendorAdapter.setGenerateDdl(this.generateDDL);
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ro.sdi.core.model");
+        factory.setPackagesToScan("model");
         factory.setDataSource(this.dataSource());
         factory.afterPropertiesSet();
         return factory.getObject();

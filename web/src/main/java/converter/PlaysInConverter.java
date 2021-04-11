@@ -2,7 +2,9 @@ package converter;
 
 import dto.PlaysInDto;
 import model.PlaysIn;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PlaysInConverter extends BaseConverter<PlaysIn, PlaysInDto> {
     @Override
     public PlaysIn convertDtoToModel(PlaysInDto dto) {

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.IActorService;
 
+@RequestMapping(value="/")
 @RestController
 public class ActorController {
     @Autowired
@@ -39,7 +40,7 @@ public class ActorController {
         var result = actorService.updateActor(actor);
         return converter.convertModelToDto(result);
     }
-    @RequestMapping(value = "/actor/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/actors/{id}", method = RequestMethod.DELETE)
     ResponseEntity<?> deleteActor(@PathVariable int id) {
         actorService.deleteActor(id);
         return new ResponseEntity<>(HttpStatus.OK);

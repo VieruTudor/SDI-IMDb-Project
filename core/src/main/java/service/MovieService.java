@@ -1,7 +1,9 @@
 package service;
 
 import model.Movie;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MovieService implements IMovieService{
     @Override
     public Movie addMovie(Movie movie) {

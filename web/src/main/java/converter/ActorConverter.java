@@ -2,7 +2,9 @@ package converter;
 
 import dto.ActorDto;
 import model.Actor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ActorConverter extends BaseConverter<Actor, ActorDto> {
     @Override
     public Actor convertDtoToModel(ActorDto dto) {

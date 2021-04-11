@@ -2,7 +2,9 @@ package service;
 
 import model.Pair;
 import model.PlaysIn;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PlaysInService implements IPlaysInService{
     @Override
     public PlaysIn addPlaysIn(PlaysIn playsIn) {
