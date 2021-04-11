@@ -1,5 +1,4 @@
 dependencies {
-
     //jpa
     compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
     compile group: 'org.springframework', name: 'spring-orm', version: "$springVersion"

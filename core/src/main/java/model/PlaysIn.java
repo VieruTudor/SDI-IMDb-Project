@@ -1,5 +1,15 @@
 package model;
 
+import lombok.*;
+
+import javax.persistence.Entity;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class PlaysIn extends BaseEntity<Pair<Integer, Integer>>{
     private int movieID;
     private int actorID;

@@ -9,12 +9,12 @@ public interface IActorService {
 
     Actor updateActor(Actor actor);
 
+    Actor getById(int id);
+
     Iterable<Actor> getAllActors();
 
     Iterable<Actor> getActorsWithFameBetween(int lower, int upper);
 
     Double getPercentageOfFamousActors(int fame);
-
-
 }
 
