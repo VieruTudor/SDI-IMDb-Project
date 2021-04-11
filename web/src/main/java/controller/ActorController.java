@@ -6,12 +6,10 @@ import dto.ActorsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import service.IActorService;
 
+@RestController
 public class ActorController {
     @Autowired
     private IActorService actorService;
@@ -20,6 +18,8 @@ public class ActorController {
 
     @RequestMapping(value="/actors")
     public ActorsDto getAllActors(){
+        System.out.println("muie poli");
+        actorService.getAllActors().forEach(System.out::println);
         return new ActorsDto(converter.convertModelsToDtos(actorService.getAllActors()));
     }
 

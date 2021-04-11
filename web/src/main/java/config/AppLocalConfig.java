@@ -4,7 +4,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ComponentScan({"ro.sdi.core"}) // ?
+//@ComponentScan({"core"})
 @Import({JPAConfig.class})
 @PropertySources({@PropertySource(value = "classpath:local/db.properties"),
 })

@@ -13,3 +13,4 @@ dependencies {
 
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
 }
+group 'ro.sdi'
