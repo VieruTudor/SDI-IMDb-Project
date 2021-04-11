@@ -15,7 +15,6 @@ import java.io.Serializable;
 @Data
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
     @Id
-    @GeneratedValue
     protected ID id;
 
     public abstract String toCSV();

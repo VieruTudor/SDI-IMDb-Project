@@ -91,7 +91,6 @@ public class ClientConsole {
 
     public void run() throws IOException {
 
-        System.out.println("sarpe");
         while (true) {
             System.out.println("help - for commands menu");
             var command = reader.readLine();
@@ -121,7 +120,7 @@ public class ClientConsole {
             CompletableFuture.supplyAsync(
                     () -> {
                         try {
-                            restTemplate.postForObject(actorUrl, new ActorDto(name, age, fame), ActorDto.class);
+                            restTemplate.postForObject(actorUrl, new ActorDto(id, name, age, fame), ActorDto.class);
                             return "Actor added";
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -142,9 +141,11 @@ public class ClientConsole {
             var name = this.getField("Name:");
             var age = Integer.parseInt(this.getField("Age:"));
             var fame = Integer.parseInt(this.getField("Fame:"));
-            var newActor = new ActorDto(name, age, fame);
+            HashMap<String, Integer> params = new HashMap<>();
+            params.put("id", id);
+            var newActor = new ActorDto(id, name, age, fame);
 
-            restTemplate.put(actorUrl + "/{id}", newActor, id);
+            restTemplate.put(actorUrl + "/{id}", newActor, params);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.updateActor();

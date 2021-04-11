@@ -8,6 +8,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MovieDto extends BaseDto<Integer>{
+    private Integer id;
     private String name;
     private int rating;
     private int year;
