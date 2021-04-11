@@ -15,4 +15,6 @@ public interface IPlaysInService {
     Iterable<PlaysIn> getAllPlaysIns();
 
     Iterable<PlaysIn> getAllPlaysInWithRole(String role);
+
+    Double getPercentageOfRolesOfActors(String role);
 }
