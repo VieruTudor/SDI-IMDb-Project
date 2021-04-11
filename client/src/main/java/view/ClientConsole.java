@@ -204,7 +204,6 @@ public class ClientConsole {
         )
                 .thenAcceptAsync(actors -> actors.getActors().forEach(System.out::println));
     }
-
     // Movie methods
     private void addMovie() {
         try {

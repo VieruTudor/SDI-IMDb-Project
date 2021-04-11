@@ -19,7 +19,6 @@ public class ActorController {
 
     @RequestMapping(value="/actors")
     public ActorsDto getAllActors(){
-        System.out.println("muie poli");
         actorService.getAllActors().forEach(System.out::println);
         return new ActorsDto(converter.convertModelsToDtos(actorService.getAllActors()));
     }

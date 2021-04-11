@@ -3,12 +3,11 @@ package repository;
 import model.Director;
 import org.springframework.data.jpa.repository.Query;
 public interface DirectorRepository extends IRepository<Director, Integer> {
+    Iterable<Director> findAllByOrderByIdAsc();
 
-    @Query("select d from director d where d.age < ?1")
-    Iterable<Director> getDirectorsAgeSmallerThen(int margin);
+    Iterable<Director> getDirectorsByAgeLessThan(int margin);
 
-    @Query("select count(*) from director d where d.age < ?1")
-    int getCountOfYoungDirectors(int age);
+    int countDirectorByAgeLessThanEqual(int age);
 
 
 }

@@ -50,19 +50,20 @@ public class PlaysInService implements IPlaysInService{
     @Override
     public Iterable<PlaysIn> getAllPlaysIns() {
 
-        return this.repo.findAll();
+//        return this.repo.findAll();
+        return this.repo.findAllByOrderByActorIDAscMovieIDAsc(); // this might not work; use query if not
     }
 
     @Override
     public Iterable<PlaysIn> getAllPlaysInWithRole(String role) {
-        return this.repo.getPlaysInRelationAfterRole(role);
+        return this.repo.getPlaysInByRoleEquals(role);
     }
 
     @Override
-    public Double getPercentageOfRolesOfActors(String role)
+    public Double getPercentageOfActorsWithRole(String role)
     {
         int PlaysInCount=(int)this.repo.count();
-        int specificRoleCount=this.repo.getCountPlaysInAfterRole(role);
+        int specificRoleCount=this.repo.countPlaysInByRoleEquals(role);
         return (double) ((specificRoleCount * 100) / PlaysInCount);
 
     }

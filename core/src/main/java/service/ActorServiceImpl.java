@@ -21,6 +21,7 @@ public class ActorServiceImpl implements IActorService {
         log.trace("Add actor started...");
         repo.save(actor);
         log.trace("Add actor done!");
+        return actor;
     }
 
     @Override
@@ -48,13 +49,13 @@ public class ActorServiceImpl implements IActorService {
 
     @Override
     public Iterable<Actor> getAllActors() {
-        return repo.findAll();
+        return repo.findAllByOrderByIdAsc();
     }
 
     @Override
     public Iterable<Actor> getActorsWithFameBetween(int lower, int upper) {
 
-        return repo.getActorsFameBetween(lower, upper);
+        return repo.getActorByFameBetween(lower, upper);
     }
 
     @Override

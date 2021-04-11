@@ -18,6 +18,7 @@ public class DirectorService implements IDirectorService{
         log.trace("Add director started...");
         this.repo.save(director);
         log.trace("Add director done.");
+        return director;
     }
 
     @Override
@@ -48,19 +49,19 @@ public class DirectorService implements IDirectorService{
 
     @Override
     public Iterable<Director> getAllDirectors() {
-        return this.repo.findAll();
+        return this.repo.findAllByOrderByIdAsc();
     }
 
     @Override
-    public Iterable<Director> getActorsWithAgeGreaterThen(int lower) {
-        return this.repo.getDirectorsAgeSmallerThen(lower);
+    public Iterable<Director> getDirectorsAgeLowerThan(int margin) {
+        return this.repo.getDirectorsByAgeLessThan(margin);
     }
 
     @Override
     public Double getPercentageOfYoungDirectors(int age)
     {
         int directorCount=(int)this.repo.count();
-        int youngDirectorCount=this.repo.getCountOfYoungDirectors(age);
+        int youngDirectorCount=this.repo.countDirectorByAgeLessThanEqual(age);
         return (double) ((youngDirectorCount * 100) / directorCount);
     }
 }

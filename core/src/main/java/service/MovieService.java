@@ -37,7 +37,7 @@ public class MovieService implements IMovieService{
         log.trace("Update movie started...");
         Movie updatedMovie=this.repo.findById(movie.getId()).orElseThrow();
         updatedMovie.setName(movie.getName());
-        updatedMovie.setRating(movie.getAge());
+        updatedMovie.setRating(movie.getRating());
         updatedMovie.setYear(movie.getYear());
         log.trace("Update movie done.");
         return movie;
@@ -51,20 +51,20 @@ public class MovieService implements IMovieService{
     @Override
     public Iterable<Movie> getAllMovies() {
 
-        return this.repo.findAll();
+        return this.repo.findAllByOrderByIdAsc();
     }
 
     @Override
     public Iterable<Movie> getMoviesWithRatingGreater(int lower) {
 
-        return this.repo.getMoviesRatingHigherThan(lower);
+        return this.repo.getMoviesByRatingGreaterThan(lower);
     }
 
     @Override
     public Double getPercentageOfMoviesThisDecade(int decade)
     {
         int totalMovieCount=(int)this.repo.count();
-        int moviesThisDecadeCount=this.repo.getCountOfMoviesThisDecade(decade);
+        int moviesThisDecadeCount=this.repo.countMoviesByYearGreaterThan(decade);
         return (double) ((moviesThisDecadeCount * 100) / totalMovieCount);
     }
 }

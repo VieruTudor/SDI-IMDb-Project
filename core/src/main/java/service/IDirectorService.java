@@ -13,7 +13,7 @@ public interface IDirectorService {
 
     Iterable<Director> getAllDirectors();
 
-    Iterable<Director> getActorsWithAgeGreaterThen(int lower);
+    Iterable<Director> getDirectorsAgeLowerThan(int lower);
     Double getPercentageOfYoungDirectors(int age);
 
 }
