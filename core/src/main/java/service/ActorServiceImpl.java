@@ -3,6 +3,7 @@ package service;
 import model.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.ActorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ public class ActorServiceImpl implements IActorService {
         log.trace("Delete actor done.");
     }
 
+    @Transactional
     @Override
     public Actor updateActor(Actor actor) {
         log.trace("Update actor started...");

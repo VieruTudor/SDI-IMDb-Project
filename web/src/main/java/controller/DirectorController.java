@@ -1,6 +1,7 @@
 package controller;
 
 import converter.DirectorConverter;
+import dto.ActorsDto;
 import dto.DirectorDto;
 import dto.DirectorsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,16 @@ public class DirectorController {
     ResponseEntity<?> deleteDirector(@PathVariable int id) {
         directorService.deleteDirector(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "directors/filterByAge/{age}", method = RequestMethod.GET)
+    DirectorsDto filterDirector(@PathVariable int age){
+        return new DirectorsDto(converter.convertModelsToDtos(directorService.getDirectorsAgeLowerThan(age)));
+    }
+
+    @RequestMapping(value = "directors/reportDirectors/{age}", method = RequestMethod.GET)
+    Double reportDirector(@PathVariable int age){
+        return directorService.getPercentageOfYoungDirectors(age);
     }
 
 }

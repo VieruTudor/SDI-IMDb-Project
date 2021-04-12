@@ -3,6 +3,7 @@ package service;
 import model.Director;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.DirectorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class DirectorService implements IDirectorService{
         log.trace("Delete director done");
 
     }
-
+    @Transactional
     @Override
     public Director updateDirector(Director director) {
         log.trace("Update director started...");

@@ -19,7 +19,6 @@ public class ActorController {
 
     @RequestMapping(value="/actors")
     public ActorsDto getAllActors(){
-        actorService.getAllActors().forEach(System.out::println);
         return new ActorsDto(converter.convertModelsToDtos(actorService.getAllActors()));
     }
 
@@ -43,6 +42,16 @@ public class ActorController {
     ResponseEntity<?> deleteActor(@PathVariable int id) {
         actorService.deleteActor(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "actors/filterByFame/{low}&{high}",method = RequestMethod.GET)
+    ActorsDto filterActors(@PathVariable int low, @PathVariable int high){
+        return new ActorsDto(converter.convertModelsToDtos(actorService.getActorsWithFameBetween(low, high)));
+    }
+
+    @RequestMapping(value = "actors/reportActors/{fame}", method = RequestMethod.GET)
+    Double reportActors(@PathVariable int fame){
+        return actorService.getPercentageOfFamousActors(fame);
     }
 
 }

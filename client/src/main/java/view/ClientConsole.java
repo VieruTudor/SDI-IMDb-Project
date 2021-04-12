@@ -145,7 +145,6 @@ public class ClientConsole {
             HashMap<String, Integer> params = new HashMap<>();
             params.put("id", id);
             var newActor = new ActorDto(id, name, age, fame);
-
             restTemplate.put(actorUrl + "/{id}", newActor, params);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -440,7 +439,7 @@ public class ClientConsole {
             Pair<Integer, Integer> id = new Pair<>();
             id.setFirst(movieID);
             id.setSecond(actorID);
-            HashMap<String, Pair> params = new HashMap<>();
+            HashMap<String, Pair<Integer, Integer>> params = new HashMap<>();
             params.put("id", id);
             var newPlaysIn = new PlaysInDto(movieID, actorID, role);
 
@@ -459,7 +458,7 @@ public class ClientConsole {
             Pair<Integer, Integer> id = new Pair<>();
             id.setFirst(movieID);
             id.setSecond(actorID);
-            Map<String, Pair> params = new HashMap<>();
+            Map<String, Pair<Integer, Integer>> params = new HashMap<>();
             params.put("id", id);
             restTemplate.delete(playsInUrl + "/{id}", params);
 

@@ -4,6 +4,7 @@ import model.Director;
 import model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.MovieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class MovieService implements IMovieService{
         this.repo.deleteById(id);
         log.trace("Delete movie done.");
     }
-
+    @Transactional
     @Override
     public Movie updateMovie(Movie movie) {
 

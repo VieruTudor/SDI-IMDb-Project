@@ -5,6 +5,7 @@ import model.Pair;
 import model.PlaysIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.PlaysInRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class PlaysInService implements IPlaysInService{
         log.trace("Delete playsIn done.");
 
     }
-
+    @Transactional
     @Override
     public PlaysIn updatePlaysIn(PlaysIn playsIn) {
         log.trace("Update playsIn started...");
