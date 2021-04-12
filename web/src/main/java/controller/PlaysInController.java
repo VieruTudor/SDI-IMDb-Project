@@ -1,9 +1,11 @@
 package controller;
 
 import converter.PlaysInConverter;
+import dto.DirectorsDto;
 import dto.PlaysInDto;
 import dto.PlaysInsDto;
 import model.Pair;
+import model.PlaysIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,4 +47,15 @@ public class PlaysInController {
         playsInService.deletePlaysIn(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "playsin/filterByRole/{role}", method = RequestMethod.GET)
+    PlaysInsDto filterPlaysIn(@PathVariable String role){
+        return new PlaysInsDto(converter.convertModelsToDtos(playsInService.getAllPlaysInWithRole(role)));
+    }
+
+    @RequestMapping(value = "playsin/reportPlaysIn/{role}", method = RequestMethod.GET)
+    Double reportPlaysIn(@PathVariable String role){
+        return playsInService.getPercentageOfActorsWithRole(role);
+    }
+
 }

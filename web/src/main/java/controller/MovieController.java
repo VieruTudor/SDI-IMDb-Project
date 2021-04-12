@@ -1,6 +1,7 @@
 package controller;
 
 import converter.MovieConverter;
+import dto.DirectorsDto;
 import dto.MovieDto;
 import dto.MoviesDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,15 @@ public class MovieController {
         movieService.deleteMovie(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "movies/filterByRating/{rating}", method = RequestMethod.GET)
+    MoviesDto filterMovie(@PathVariable int rating){
+        return new MoviesDto(converter.convertModelsToDtos(movieService.getMoviesWithRatingGreater(rating)));
+    }
+
+    @RequestMapping(value = "movies/reportMovies/{year}", method = RequestMethod.GET)
+    Double reportMovies(@PathVariable int year){
+        return movieService.getPercentageOfMoviesThisDecade(year);
+    }
+
 }
