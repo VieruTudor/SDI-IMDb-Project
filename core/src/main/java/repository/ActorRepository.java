@@ -11,4 +11,6 @@ public interface ActorRepository extends IRepository<Actor, Integer>{
     int countActorByFameGreaterThanEqual(int threshold);
 
 
+
+
 }

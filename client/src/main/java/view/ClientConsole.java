@@ -10,6 +10,7 @@ import model.PlaysIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +34,7 @@ public class ClientConsole {
     String directorUrl = "http://localhost:8080/api/directors";
     String moviesUrl = "http://localhost:8080/api/movies";
     String playsInUrl = "http://localhost:8080/api/playsin";
+
     @PostConstruct
     private void initialize() {
 
@@ -145,7 +147,17 @@ public class ClientConsole {
             HashMap<String, Integer> params = new HashMap<>();
             params.put("id", id);
             var newActor = new ActorDto(id, name, age, fame);
-            restTemplate.put(actorUrl + "/{id}", newActor, params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.put(actorUrl + "/{id}", newActor, params);
+                            return "Actor updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.updateActor();
@@ -155,9 +167,19 @@ public class ClientConsole {
     private void deleteActor() {
         try {
             var id = Integer.parseInt(this.getField("ID:"));
-            Map<String, Integer>params = new HashMap<>();
+            Map<String, Integer> params = new HashMap<>();
             params.put("id", id);
-            restTemplate.delete(actorUrl + "/{id}", params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.delete(actorUrl + "/{id}", params);
+                            return "Actor deleted";
+                        } catch (RestClientException e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
             this.deleteActor();
@@ -247,7 +269,17 @@ public class ClientConsole {
             params.put("id", id);
             var newMovie = new MovieDto(id, name, rating, year, directorID);
 
-            restTemplate.put(moviesUrl + "/{id}", newMovie, params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.put(moviesUrl + "/{id}", newMovie, params);
+                            return "Movie updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -260,7 +292,18 @@ public class ClientConsole {
             var id = Integer.parseInt(this.getField("ID:"));
             Map<String, Integer> params = new HashMap<>();
             params.put("id", id);
-            restTemplate.delete(moviesUrl + "/{id}", params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.delete(moviesUrl + "/{id}", params);
+                            return "Movie deleted";
+                        } catch (RestClientException e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            )
+                    .thenAcceptAsync(System.out::println);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -341,8 +384,17 @@ public class ClientConsole {
             HashMap<String, Integer> params = new HashMap<>();
             params.put("id", id);
             var newDirector = new DirectorDto(id, name, age);
-
-            restTemplate.put(directorUrl + "/{id}", newDirector, params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.put(directorUrl + "/{id}", newDirector, params);
+                            return "Director updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -355,7 +407,17 @@ public class ClientConsole {
             var id = Integer.parseInt(this.getField("ID:"));
             Map<String, Integer> params = new HashMap<>();
             params.put("id", id);
-            restTemplate.delete(directorUrl + "/{id}", params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try{
+                            restTemplate.delete(directorUrl + "/{id}", params);
+                            return "Director deleted";
+                        } catch (RestClientException e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -439,11 +501,21 @@ public class ClientConsole {
             Pair<Integer, Integer> id = new Pair<>();
             id.setFirst(movieID);
             id.setSecond(actorID);
-            HashMap<String, Pair<Integer, Integer>> params = new HashMap<>();
-            params.put("id", id);
+            HashMap<String, Integer> params = new HashMap<>();
+            params.put("id1", movieID);
+            params.put("id2", actorID);
             var newPlaysIn = new PlaysInDto(movieID, actorID, role);
-
-            restTemplate.put(playsInUrl + "/{id}", newPlaysIn, params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.put(playsInUrl + "/{id1}&{id2}", newPlaysIn, params);
+                            return "Plays in updated";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
@@ -460,7 +532,17 @@ public class ClientConsole {
             id.setSecond(actorID);
             Map<String, Pair<Integer, Integer>> params = new HashMap<>();
             params.put("id", id);
-            restTemplate.delete(playsInUrl + "/{id}", params);
+            CompletableFuture.supplyAsync(
+                    () -> {
+                        try {
+                            restTemplate.delete(playsInUrl + "/{id}", params);
+                            return "Role deleted";
+                        } catch (RestClientException e) {
+                            e.printStackTrace();
+                            return e.getMessage();
+                        }
+                    }
+            ).thenAcceptAsync(System.out::println);
 
         } catch (IOException | InexistentEntity e) {
             System.out.println(e.getMessage());
