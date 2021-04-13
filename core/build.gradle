@@ -7,7 +7,8 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version:"$hibernateVersion"
 
     compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
-
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "$slf4jVersion"
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: "$slf4jVersion"
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: "$caffeineVersion"
     compile group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
 

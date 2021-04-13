@@ -5,13 +5,17 @@ import exceptions.DuplicateException;
 import exceptions.InexistentEntity;
 import exceptions.ProgramException;
 import exceptions.ValidException;
+import lombok.extern.log4j.Log4j;
 import model.Pair;
 import model.PlaysIn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import service.ActorServiceImpl;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
@@ -26,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @Component
+@Log4j
 public class ClientConsole {
 
     @Autowired
@@ -91,9 +96,7 @@ public class ClientConsole {
         return reader.readLine();
     }
 
-
     public void run() throws IOException {
-
         while (true) {
             System.out.println("help - for commands menu");
             var command = reader.readLine();
