@@ -39,7 +39,7 @@ public class PlaysInService implements IPlaysInService {
     @Override
     @Transactional
     public void addPlaysIn(int movieId, int actorId, String role) {
-        log.trace("add Plays In - method started");
+        log.info("add Plays In - method started");
         Validator.validatePlaysIn(role);
         Optional.of(this.movieRepo.findById(movieId)).get().orElseThrow(
                 () -> {
@@ -53,7 +53,7 @@ public class PlaysInService implements IPlaysInService {
 
         PlaysIn playsIn = new PlaysIn(movieId, actorId, role);
         this.playsInRepo.save(playsIn);
-        log.trace("add PlaysIn - ✔ done");
+        log.info("add PlaysIn - ✔ done");
     }
 
     /**
@@ -65,9 +65,9 @@ public class PlaysInService implements IPlaysInService {
     @Override
     @Transactional
     public void deletePlaysIn(int movieId, int actorId) {
-        log.trace("delete Role - method started");
+        log.info("delete Role - method started");
         this.playsInRepo.deleteById(new Pair<>(movieId, actorId));
-        log.trace("delete Role - ✔ done");
+        log.info("delete Role - ✔ done");
     }
 
     /**
@@ -80,7 +80,7 @@ public class PlaysInService implements IPlaysInService {
     @Override
     @Transactional
     public void updatePlaysIn(int movieId, int actorId, String role) {
-        log.trace("update Role - method started");
+        log.info("update Role - method started");
         Validator.validatePlaysIn(role);
         Optional.of(this.playsInRepo.findById(new Pair<>(actorId, movieId))).get().orElseThrow(
                 () -> {
@@ -88,8 +88,9 @@ public class PlaysInService implements IPlaysInService {
                 });
         this.playsInRepo.deleteById(new Pair<>(actorId, movieId));
         PlaysIn newPlaysIn = new PlaysIn(movieId, actorId, role);
+        newPlaysIn.setId(new Pair<>(actorId, movieId));
         this.playsInRepo.save(newPlaysIn);
-        log.trace("update Role - ✔ done");
+        log.info("update Role - ✔ done");
     }
 
     /**

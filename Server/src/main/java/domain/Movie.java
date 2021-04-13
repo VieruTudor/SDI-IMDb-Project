@@ -9,6 +9,9 @@ public class Movie extends BaseEntity<Integer>{
     private int year;
     private int directorId;
 
+    public Movie(){
+
+    }
     /**
      * Creates a movie object with specific name, rating, year
      *

@@ -10,6 +10,5 @@ public class Main {
     public static void main(String[] args) {
         new AnnotationConfigApplicationContext(AppLocalConfig.class, Config.class, JPAConfig.class);
         System.out.println("Server started");
-        System.out.println(IActorService.class.getSimpleName());
     }
 }

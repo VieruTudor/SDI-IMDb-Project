@@ -33,12 +33,12 @@ public class MovieService implements IMovieService {
     @Transactional
     public void addMovie(int id, String name, int rating, int year, int directorId)
     {
-        log.trace("add movie - method started");
+        log.info("add movie - method started");
         Validator.validateMovie(name,rating,year,directorId);
         Movie newMovie=new Movie(name,rating,year,directorId);
         newMovie.setId(id);
         this.repo.save(newMovie);
-        log.trace("add movie - done");
+        log.info("add movie - done");
     }
 
     /**
@@ -50,13 +50,13 @@ public class MovieService implements IMovieService {
     @Transactional
     public void deleteMovie(int id)
     {
-        log.trace("delete movie - method started");
+        log.info("delete movie - method started");
         Optional.of(this.repo.findById(id)).get().orElseThrow(
                 () -> {
                     throw new InexistentEntity("Movie not present !");
                 });
         this.repo.deleteById(id);
-        log.trace("delete movie - done");
+        log.info("delete movie - done");
     }
 
     /**
@@ -72,7 +72,7 @@ public class MovieService implements IMovieService {
     @Transactional
     public void updateMovie(int id, String name, int rating, int year, int directorId)
     {
-        log.trace("update movie - method started");
+        log.info("update movie - method started");
         Validator.validateMovie(name,rating,year,directorId);
         Optional.of(this.repo.findById(id)).get().orElseThrow(
                 () -> {
@@ -83,7 +83,7 @@ public class MovieService implements IMovieService {
         Movie updated=new Movie(name,rating,year,directorId);
         updated.setId(id);
         this.repo.save(updated);
-        log.trace("update movie - done");
+        log.info("update movie - done");
 
     }
 

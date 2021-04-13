@@ -36,13 +36,12 @@ public class ActorService implements IActorService {
     @Override
     @Transactional
     public void addActor(int id, String name, int age, int fame) {
-        log.trace("add actor - method started");
+        log.info("add actor - method started");
         Validator.validateActor(name, age, fame);
         Actor newActor = new Actor(name, age, fame);
-
         newActor.setId(id);
         this.repo.save(newActor);
-        log.trace("add actor - done");
+        log.info("add actor - done");
     }
 
     /**
@@ -53,13 +52,13 @@ public class ActorService implements IActorService {
     @Override
     @Transactional
     public void deleteActor(int id) {
-        log.trace("delete actor - method started");
+        log.info("delete actor - method started");
         Optional.of(this.repo.findById(id)).get().orElseThrow(
                 () -> {
                     throw new InexistentEntity("Movie not present !");
                 });
         this.repo.deleteById(id);
-        log.trace("delete actor - done");
+        log.info("delete actor - done");
     }
 
     /**
@@ -73,7 +72,7 @@ public class ActorService implements IActorService {
     @Override
     @Transactional
     public void updateActor(int id, String name, int age, int fame) {
-        log.trace("update actor - method started");
+        log.info("update actor - method started");
         Validator.validateActor(name, age, fame);
         Optional.of(this.repo.findById(id)).get().orElseThrow(
                 () -> {
@@ -81,8 +80,9 @@ public class ActorService implements IActorService {
                 });
         this.repo.deleteById(id);
         Actor newActor = new Actor(name, age, fame);
+        newActor.setId(id);
         this.repo.save(newActor);
-        log.trace("update actor - done");
+        log.info("update actor - done");
 
 
     }

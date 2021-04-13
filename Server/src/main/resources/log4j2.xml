@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Properties>
-        <Property name="filename">./log/catalog.log</Property>
-        <Property name="filenamePattern">log/catalog-%i.log</Property>
+        <Property name="filename">./log/info.log</Property>
+        <Property name="filenamePattern">log/info-%i.log</Property>
         <Property name="pattern">%d{ISO8601} %-5p [%t]: %-36.36c{1} - %m %n
         </Property>
     </Properties>
@@ -34,10 +34,13 @@
         <Logger name="org.springframework.web" level="WARN"/>
         <Logger name="org.springframework.http.converter.json" level="WARN"/>
         <Logger name="com.fasterxml.jackson.databind" level="WARN"/>
-        <Logger name="ro.sdi" level="TRACE"/>
+        <Logger name="ro.sdi" level="TRACE">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
 
         <!-- ROOT -->
-        <Root level="WARN">
+        <Root level="INFO">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Root>

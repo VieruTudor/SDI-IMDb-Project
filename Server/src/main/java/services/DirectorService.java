@@ -33,12 +33,12 @@ public class DirectorService implements IDirectorService {
     @Override
     @Transactional
     public void addDirector(int id, String name, int age) {
-        log.trace("add Director - method started");
+        log.info("add Director - method started");
         Validator.validateDirector(name, age);
         Director directorToAdd = new Director(name, age);
         directorToAdd.setId(id);
         directorRepo.save(directorToAdd);
-        log.trace("add Director - ✔ done");
+        log.info("add Director - ✔ done");
     }
 
     /**
@@ -49,13 +49,13 @@ public class DirectorService implements IDirectorService {
     @Override
     @Transactional
     public void deleteDirector(int id) {
-        log.trace("delete Director - method started");
+        log.info("delete Director - method started");
         Optional.of(this.directorRepo.findById(id)).get().orElseThrow(
                 () -> {
                     throw new InexistentEntity("Director not present !");
                 });
         this.directorRepo.deleteById(id);
-        log.trace("delete Director - ✔ done");
+        log.info("delete Director - ✔ done");
     }
 
     /**
@@ -68,7 +68,7 @@ public class DirectorService implements IDirectorService {
     @Override
     @Transactional
     public void updateDirector(int id, String name, int age) {
-        log.trace("update Director - method started");
+        log.info("update Director - method started");
         Validator.validateDirector(name, age);
         Optional.of(this.directorRepo.findById(id)).get().orElseThrow(
                 () -> {
@@ -76,8 +76,9 @@ public class DirectorService implements IDirectorService {
                 });
         this.directorRepo.deleteById(id);
         Director new_director = new Director(name, age);
+        new_director.setId(id);
         this.directorRepo.save(new_director);
-        log.trace("update Director - ✔ done");
+        log.info("update Director - ✔ done");
     }
 
     /**
