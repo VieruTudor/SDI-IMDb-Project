@@ -19,28 +19,28 @@ public class ActorServiceImpl implements IActorService {
 
     @Override
     public Actor addActor(Actor actor) {
-        log.trace("Add actor started...");
+        log.info("Add actor started...");
         repo.save(actor);
-        log.trace("Add actor done!");
+        log.info("Add actor done!");
         return actor;
     }
 
     @Override
     public void deleteActor(int id) {
-        log.trace("Delete actor started...");
+        log.info("Delete actor started...");
         repo.deleteById(id);
-        log.trace("Delete actor done.");
+        log.info("Delete actor done.");
     }
 
     @Transactional
     @Override
     public Actor updateActor(Actor actor) {
-        log.trace("Update actor started...");
+        log.info("Update actor started...");
         Actor updateActor = repo.findById(actor.getId()).orElseThrow();
         updateActor.setName(actor.getName());
         updateActor.setAge(actor.getAge());
         updateActor.setFame(actor.getFame());
-        log.trace("Update actor done.");
+        log.info("Update actor done.");
         return actor;
     }
 

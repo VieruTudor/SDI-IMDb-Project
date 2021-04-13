@@ -18,29 +18,29 @@ public class MovieService implements IMovieService{
     public static final Logger log = LoggerFactory.getLogger(MovieService.class);
     @Override
     public Movie addMovie(Movie movie) {
-        log.trace("Add movie started...");
+        log.info("Add movie started...");
         this.repo.save(movie);
-        log.trace("Add movie done.");
+        log.info("Add movie done.");
         return movie;
 
     }
 
     @Override
     public void deleteMovie(int id) {
-        log.trace("Delete movie started...");
+        log.info("Delete movie started...");
         this.repo.deleteById(id);
-        log.trace("Delete movie done.");
+        log.info("Delete movie done.");
     }
     @Transactional
     @Override
     public Movie updateMovie(Movie movie) {
 
-        log.trace("Update movie started...");
+        log.info("Update movie started...");
         Movie updatedMovie=this.repo.findById(movie.getId()).orElseThrow();
         updatedMovie.setName(movie.getName());
         updatedMovie.setRating(movie.getRating());
         updatedMovie.setYear(movie.getYear());
-        log.trace("Update movie done.");
+        log.info("Update movie done.");
         return movie;
     }
 

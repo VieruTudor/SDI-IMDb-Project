@@ -4,6 +4,8 @@ import dto.BaseDto;
 import model.BaseEntity;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -22,9 +24,9 @@ public abstract class BaseConverter<Model extends BaseEntity<? extends Serializa
                 .collect(Collectors.toSet());
     }
 
-    public Set<Dto> convertModelsToDtos(Iterable<Model> models) {
+    public List<Dto> convertModelsToDtos(Iterable<Model> models) {
         return StreamSupport.stream(models.spliterator(), false)
                 .map(this::convertModelToDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

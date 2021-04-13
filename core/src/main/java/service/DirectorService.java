@@ -16,27 +16,27 @@ public class DirectorService implements IDirectorService{
 
     @Override
     public Director addDirector(Director director) {
-        log.trace("Add director started...");
+        log.info("Add director started...");
         this.repo.save(director);
-        log.trace("Add director done.");
+        log.info("Add director done.");
         return director;
     }
 
     @Override
     public void deleteDirector(int id) {
-        log.trace("Delete director started...");
+        log.info("Delete director started...");
         this.repo.deleteById(id);
-        log.trace("Delete director done");
+        log.info("Delete director done");
 
     }
     @Transactional
     @Override
     public Director updateDirector(Director director) {
-        log.trace("Update director started...");
+        log.info("Update director started...");
         Director updatedDirector=this.repo.findById(director.getId()).orElseThrow();
         updatedDirector.setName(director.getName());
         updatedDirector.setAge(director.getAge());
-        log.trace("Update director done");
+        log.info("Update director done");
         return director;
 
 
