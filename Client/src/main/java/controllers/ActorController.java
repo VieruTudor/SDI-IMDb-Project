@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActorController implements FutureActorController {
 
-
     @Autowired
     private IActorService actorController;
 
